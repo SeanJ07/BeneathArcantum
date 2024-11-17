@@ -43,9 +43,11 @@ public class GameManager : MonoBehaviour
 
     void CameraFollow()
     {
+        // takes the position of the player
         Vector3 playerPosition = player.transform.position;
 
-        mainCam.transform.position = playerPosition + new Vector3(0, 0, -10);
+        // makes the camera follow the position of the player, but adds the additional vector3 to its position.
+        mainCam.transform.position = playerPosition + new Vector3(0, 0, -20);
     }
 
     void StartGame()
@@ -55,6 +57,7 @@ public class GameManager : MonoBehaviour
     
     public void PauseGame()
     {
+        // Pauses the game when escape is pressed.
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             pauseScreen.SetActive(true);
