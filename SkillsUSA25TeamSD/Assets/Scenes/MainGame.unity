@@ -1870,6 +1870,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 399521601488182086, guid: 3ec725212c805574f9962e056082f9a8, type: 3}
+      propertyPath: waypointPath
+      value: 
+      objectReference: {fileID: 158538729}
     - target: {fileID: 399521601488182104, guid: 3ec725212c805574f9962e056082f9a8, type: 3}
       propertyPath: m_Name
       value: MovingFloor
