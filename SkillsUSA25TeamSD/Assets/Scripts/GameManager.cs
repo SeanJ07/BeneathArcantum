@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
         levelCompletedText.text = "Level " + level + " Completed!";
         level += 1;
         player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
-        player.GetComponent<PlayerMovement>().enabled = false;
+        player.GetComponent<PlayerController>().enabled = false;
         
     }
     
