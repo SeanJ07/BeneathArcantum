@@ -28,20 +28,14 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         PlayerMovements();
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.5f, whatIsGround);
-        while (grounded)
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.75f, whatIsGround);
+        if (grounded)
         {
             playerRb.drag = groundDrag;
-            Physics.gravity = new Vector3(0, 1f, 0);
         }
         if (Input.GetKey(KeyCode.Space) && grounded)
         {
             Jump();
-        }
-
-        while (!grounded)
-        {
-            Physics.gravity = new Vector3(0, 2f, 0);
         }
 
     }
@@ -56,7 +50,7 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        playerRb.velocity = new Vector3(playerRb.velocity.x, -2, playerRb.velocity.z);
+        playerRb.velocity = new Vector3(playerRb.velocity.x, -1, playerRb.velocity.z);
         playerRb.drag /= 2;
         playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }
