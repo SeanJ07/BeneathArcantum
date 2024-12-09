@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour
 
     void StartGame()
     {
-
+        SceneManager.LoadScene("MainGame");
     }
     
     public void PauseGame()
