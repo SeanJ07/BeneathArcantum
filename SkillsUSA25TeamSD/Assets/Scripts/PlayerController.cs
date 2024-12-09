@@ -16,6 +16,9 @@ public class PlayerController : MonoBehaviour
     public bool grounded;
     public float groundDrag;
 
+    [Header("Wall Interactions")]
+    public bool onWall;
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,19 +28,27 @@ public class PlayerController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
-        PlayerMovements();
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.75f, whatIsGround);
+        //grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.9f, whatIsGround);
         if (grounded)
         {
             playerRb.drag = groundDrag;
         }
-        if (Input.GetKey(KeyCode.Space) && grounded)
+        if (Input.GetKeyDown(KeyCode.Space) && grounded || (Input.GetKeyDown(KeyCode.Space) && onWall))
         {
             Jump();
         }
+        if (onWall)
+        {
+            playerRb.drag = groundDrag / 2;
+        }
 
+    }
+
+    private void FixedUpdate()
+    {
+        PlayerMovements();
     }
 
     private void PlayerMovements()
@@ -50,8 +61,25 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        playerRb.velocity = new Vector3(playerRb.velocity.x, -1, playerRb.velocity.z);
+        playerRb.velocity = new Vector3(playerRb.velocity.x, 0, playerRb.velocity.z);
+        playerRb.velocity = new Vector3(playerRb.velocity.x, 4, playerRb.velocity.z);
         playerRb.drag /= 2;
         playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            grounded = true;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            grounded = false;
+        }
     }
 }

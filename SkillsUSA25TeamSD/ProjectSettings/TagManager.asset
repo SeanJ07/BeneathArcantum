@@ -8,6 +8,8 @@ TagManager:
   - Start
   - End
   - Checkpoint
+  - Door
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX
