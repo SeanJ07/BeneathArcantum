@@ -2252,6 +2252,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 253693111935666961, guid: cc42528bdaac9d542a29494f86b3c895, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 4015257413560777688, guid: cc42528bdaac9d542a29494f86b3c895, type: 3}
       propertyPath: m_Name
       value: ClimbableWall
@@ -3139,6 +3143,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 253693111935666961, guid: ce686b8d3c9b3f44bb5d85c6bd79745f, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
     - target: {fileID: 4015257413560777688, guid: ce686b8d3c9b3f44bb5d85c6bd79745f, type: 3}
       propertyPath: m_Name
       value: Ladder
