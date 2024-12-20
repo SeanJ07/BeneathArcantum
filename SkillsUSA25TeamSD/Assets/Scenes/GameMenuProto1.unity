@@ -1114,7 +1114,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -23.1, y: -206.63007, z: 8.5}
+  m_LocalEulerAnglesHint: {x: -23.557793, y: -206.21799, z: 8.5}
 --- !u!114 &215445313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9356,7 +9356,6 @@ GameObject:
   - component: {fileID: 980203829}
   - component: {fileID: 980203831}
   - component: {fileID: 980203830}
-  - component: {fileID: 980203832}
   m_Layer: 0
   m_Name: Gear1 (1)
   m_TagString: Untagged
@@ -9371,14 +9370,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980203828}
-  m_LocalRotation: {x: -0.5119442, y: -0.1358507, z: -0.32358378, w: 0.78406084}
+  m_LocalRotation: {x: -0.49336132, y: -0.1498497, z: -0.32624918, w: 0.79227597}
   m_LocalPosition: {x: -10.341, y: 14.93, z: 7.906}
   m_LocalScale: {x: 53.7, y: 53.7, z: 53.7}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 1872713488}
   m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: -62.16162, y: 13.311502, z: -52.585278}
+  m_LocalEulerAnglesHint: {x: -61.586, y: 10.226, z: -50.867}
 --- !u!23 &980203830
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -9429,22 +9428,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 980203828}
   m_Mesh: {fileID: 2832982408811946868, guid: 2f60c3e52c46c0a4581f2259db218a02, type: 3}
---- !u!111 &980203832
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 980203828}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: 47f5cc6f39356ce47b5942b4e1351a02, type: 2}
-  m_Animations:
-  - {fileID: 7400000, guid: 47f5cc6f39356ce47b5942b4e1351a02, type: 2}
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!1 &980688624
 GameObject:
   m_ObjectHideFlags: 0
