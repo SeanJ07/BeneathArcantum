@@ -6,7 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     public float movementSpeed = 50f;
-    public float jumpForce = 10f;
+    public float jumpForce = 20f;
+    private float gravMultiplier = 1;
 
     Rigidbody playerRb;
 
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
         if (grounded)
         {
             playerRb.drag = groundDrag;
+            gravMultiplier = 0;
         }
         if (Input.GetKeyDown(KeyCode.Space) && grounded || (Input.GetKeyDown(KeyCode.Space) && onWall))
         {
@@ -43,6 +45,16 @@ public class PlayerController : MonoBehaviour
         {
             playerRb.drag = groundDrag / 2;
         }
+        if (!grounded || !onWall)
+        {
+            gravMultiplier += Time.deltaTime;
+            Physics.gravity = new Vector3(0, (-25 - gravMultiplier), 0);
+        }
+        else
+        {
+            Physics.gravity = new Vector3(0, -25, 0);
+        }
+
 
     }
 
@@ -62,7 +74,6 @@ public class PlayerController : MonoBehaviour
     private void Jump()
     {
         playerRb.velocity = new Vector3(playerRb.velocity.x, 0, playerRb.velocity.z);
-        playerRb.velocity = new Vector3(playerRb.velocity.x, 4, playerRb.velocity.z);
         playerRb.drag /= 2;
         playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
     }

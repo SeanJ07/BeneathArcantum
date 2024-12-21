@@ -27,5 +27,12 @@ public class LadderScript : MonoBehaviour
         }
     }
 
+    void OnCollisionExit(Collision other)
+    {
+        if (other.gameObject == player)
+        {
+            player.GetComponent<PlayerController>().onWall = false;
 
+        }
+    }
 }
