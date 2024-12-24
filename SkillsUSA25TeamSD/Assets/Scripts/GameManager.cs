@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     [Header("StoredInfo")]
     private int level = 1;
 
+    public bool threeDCam;
+    private bool camTransitioning;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -46,8 +49,17 @@ public class GameManager : MonoBehaviour
         // takes the position of the player
         Vector3 playerPosition = player.transform.position;
 
-        // makes the camera follow the position of the player, but adds the additional vector3 to its position.
-        mainCam.transform.position = playerPosition + new Vector3(0, 0, -20);
+        if (threeDCam == false)
+        {
+            // makes the camera follow the position of the player, but adds the additional vector3 to its position.
+            mainCam.transform.position = playerPosition + new Vector3(0, 0, -20);
+            mainCam.transform.rotation = new Quaternion(0, 0, 0,0);
+        }
+        else if (threeDCam == true)
+        {
+            mainCam.transform.position = playerPosition + new Vector3(7.5f, 7, 0);
+            mainCam.transform.rotation = new Quaternion(20, -90, 0, 0);
+        }
     }
 
     void StartGame()

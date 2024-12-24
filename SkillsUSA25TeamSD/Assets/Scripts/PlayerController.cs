@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed = 50f;
     public float jumpForce = 20f;
     private float gravMultiplier = 1;
+    public bool locked = false;
 
     Rigidbody playerRb;
 
@@ -60,7 +61,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        PlayerMovements();
+        if (!locked)
+        { 
+            PlayerMovements();
+        }
     }
 
     private void PlayerMovements()
@@ -92,5 +96,11 @@ public class PlayerController : MonoBehaviour
         {
             grounded = false;
         }
+    }
+
+    public void ChangeLockedStatus()
+    {
+        playerRb.velocity = new Vector3(0, 0, 0);
+        locked = !locked;
     }
 }

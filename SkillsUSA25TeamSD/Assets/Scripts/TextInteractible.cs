@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Interactible : MonoBehaviour
+
+public class TextInteractible : MonoBehaviour
 {
+    [TextArea] public string[] messages;
     public UnityEvent onEnter;
     public UnityEvent onExit;
     public UnityEvent onActivated;
 
-    private GameManager gameManager;
+    public MessageList messageList;
 
-    // Start is called before the first frame update
     void Start()
     {
-        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -27,6 +27,7 @@ public class Interactible : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            messageList.messages = messages;
             onEnter.Invoke();
         }
     }
@@ -37,10 +38,5 @@ public class Interactible : MonoBehaviour
         {
             onExit.Invoke();
         }
-    }
-
-    public void changeCam()
-    {
-        gameManager.threeDCam = !gameManager.threeDCam;
     }
 }

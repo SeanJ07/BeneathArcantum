@@ -10,6 +10,7 @@ TagManager:
   - Checkpoint
   - Door
   - MovingPlatform
+  - TextInteractible
   layers:
   - Default
   - TransparentFX
