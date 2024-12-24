@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     [Header("Wall Interactions")]
     public bool onWall;
 
-
+    public bool topdownView;
     // Start is called before the first frame update
     void Start()
     {
@@ -71,8 +71,13 @@ public class PlayerController : MonoBehaviour
     {
         // Checks if the keys for the axis "Horizontal" are being inputted, and gives it a value between -1 and 1.
         float horizontal = Input.GetAxis("Horizontal");
-
+        float vertical = Input.GetAxis("Vertical");
         playerRb.AddForce(Vector3.right * movementSpeed * horizontal, ForceMode.Force);
+        if (topdownView)
+        {
+            playerRb.AddForce(Vector3.forward * movementSpeed * vertical, ForceMode.Force);
+        }
+
     }
 
     private void Jump()
