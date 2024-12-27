@@ -12,7 +12,7 @@ EditorBuildSettings:
     path: Assets/Scenes/StartingCutScene.unity
     guid: b0d47c2080f0baa4db8948741774c27c
   - enabled: 1
-    path: Assets/Scenes/MainGame.unity
+    path: Assets/Scenes/CaveScene.unity
     guid: 2badac0c84024614f980e1d5f0029604
   - enabled: 1
     path: Assets/Scenes/SandBox.unity
