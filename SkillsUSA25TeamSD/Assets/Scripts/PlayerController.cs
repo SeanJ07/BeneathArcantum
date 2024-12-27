@@ -22,11 +22,19 @@ public class PlayerController : MonoBehaviour
     public bool onWall;
 
     public bool topdownView;
+
+    private AudioSource audio;
+    public AudioClip hurt;
+    public AudioClip collect;
+    public AudioClip waking; //not sure how to code the walking since i dont want it to play in the air
+
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerRb.drag = groundDrag;
+
+        audio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

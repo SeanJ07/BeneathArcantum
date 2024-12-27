@@ -3,7 +3,16 @@ guid: 108e3afdfb46ea9429de20bd7ceee9a8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - mainCam: {instanceID: 0}
+  - pauseScreen: {instanceID: 0}
+  - levelCompletedScreen: {instanceID: 0}
+  - levelCompletedText: {instanceID: 0}
+  - currentCheckpoint: {instanceID: 0}
+  - startPoint: {instanceID: 0}
+  - endPoint: {instanceID: 0}
+  - win: {fileID: 8300000, guid: 70f4f352af1d474459b65da06b6ee2c6, type: 3}
+  - lose: {fileID: 8300000, guid: 7908408ea1147d54a891c8c0e05f34c6, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

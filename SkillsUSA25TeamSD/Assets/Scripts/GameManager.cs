@@ -27,6 +27,10 @@ public class GameManager : MonoBehaviour
     public bool threeDCam;
     private bool camTransitioning;
 
+    private AudioSource gameAudio;
+    public AudioClip win;
+    public AudioClip lose;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,6 +39,7 @@ public class GameManager : MonoBehaviour
         pauseScreen.SetActive(false);
         player.transform.position = new Vector3(startPoint.transform.position.x, startPoint.transform.position.y, player.transform.position.z);
         currentCheckpoint = startPoint.gameObject;
+        gameAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -93,6 +98,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Finished Level");
         levelCompletedScreen.gameObject.SetActive(true);
         levelCompletedText.text = "Level " + level + " Completed!";
+        gameAudio.PlayOneShot(win);
         level += 1;
         player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         player.GetComponent<PlayerController>().enabled = false;
