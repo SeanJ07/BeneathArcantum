@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [Header("UI")]
+    
     public Camera mainCam;
     public GameObject pauseScreen;
     public GameObject levelCompletedScreen;
@@ -62,8 +63,8 @@ public class GameManager : MonoBehaviour
         }
         else if (threeDCam == true)
         {
-            mainCam.transform.position = playerPosition + new Vector3(7.5f, 7, 0);
-            mainCam.transform.rotation = new Quaternion(20, -90, 0, 0);
+            mainCam.transform.position = playerPosition + new Vector3(0, 8, -10);
+            mainCam.transform.rotation =  Quaternion.Euler(45, 0, 0);
         }
     }
 

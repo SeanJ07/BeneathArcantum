@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
 
     public bool topdownView;
 
+    public bool playerWalking;
     private AudioSource audioSource;
     public AudioClip hurt;
     public AudioClip collect;
@@ -77,7 +78,10 @@ public class PlayerController : MonoBehaviour
         if (!locked)
         { 
             PlayerMovements();
+
         }
+        
+        
     }
 
     private void PlayerMovements()
@@ -86,11 +90,12 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         playerRb.AddForce(Vector3.right * movementSpeed * horizontal, ForceMode.Force);
+
         if (topdownView)
         {
             playerRb.AddForce(Vector3.forward * movementSpeed * vertical, ForceMode.Force);
         }
-
+        
 
     }
 
@@ -99,6 +104,7 @@ public class PlayerController : MonoBehaviour
         playerRb.velocity = new Vector3(playerRb.velocity.x, 0, playerRb.velocity.z);
         playerRb.drag /= 2;
         playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
     }
 
     private void OnCollisionStay(Collision collision)
@@ -114,6 +120,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             grounded = false;
+            
         }
     }
 
