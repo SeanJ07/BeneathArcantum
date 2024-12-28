@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
         pauseScreen.SetActive(false);
         player.transform.position = new Vector3(startPoint.transform.position.x, startPoint.transform.position.y, player.transform.position.z);
         currentCheckpoint = startPoint.gameObject;
-        gameAudio = GetComponent<AudioSource>();
+        gameAudio = Camera.main.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

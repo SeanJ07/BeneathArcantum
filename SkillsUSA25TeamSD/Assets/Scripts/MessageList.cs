@@ -9,6 +9,7 @@ public class MessageList : MonoBehaviour
 {
     public TextMeshProUGUI textOutput;
     public int currentMessage;
+    public int currentLetter;
     public float textDelay = 0.05f;
     public UnityEvent endEvent;
     private MessageList messageList;
@@ -34,7 +35,7 @@ public class MessageList : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E)) // E to continue onto the next message.
         {
-            NextMessage();
+            StartCoroutine(NextMessage());
         }
 
         if (currentMessage >= messages.Length) // Once all the messages are gone through, initiate end event ( turn off gameObject)
@@ -44,12 +45,14 @@ public class MessageList : MonoBehaviour
         }
     }
 
-    public void NextMessage()
+    public IEnumerator NextMessage()
     {
         if (currentMessage < messages.Length) // While the current message hasnt gone through all the messages, go to the next message after the current one is done.
         {
             currentMessage += 1;
             StartCoroutine(typewriterEffect());
+
+            yield break;
         }
     }
 
@@ -66,11 +69,15 @@ public class MessageList : MonoBehaviour
 
     public IEnumerator typewriterEffect() // Does the typewriter effect
     {
+        StopCoroutine(typewriterEffect());
         string currentText = "";
+        currentLetter = 0;
 
-        for (int i = 0; i < messages[currentMessage].Length + 1; i++)
+        textOutput.text = currentText;
+
+        for (currentLetter = 0; currentLetter < messages[currentMessage].Length + 1; currentLetter++)
         {
-            currentText = messages[currentMessage].Substring(0, i);
+            currentText = messages[currentMessage].Substring(0, currentLetter);
             textOutput.text = currentText;
 
             yield return new WaitForSeconds(textDelay);

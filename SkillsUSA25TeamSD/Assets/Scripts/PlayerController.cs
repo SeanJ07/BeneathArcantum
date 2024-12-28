@@ -23,18 +23,23 @@ public class PlayerController : MonoBehaviour
 
     public bool topdownView;
 
-    private AudioSource audio;
+    private AudioSource audioSource;
     public AudioClip hurt;
     public AudioClip collect;
-    public AudioClip waking; //not sure how to code the walking since i dont want it to play in the air
+    public AudioClip walking; //not sure how to code the walking since i dont want it to play in the air
 
-    // Start is called before the first frame update
+    private void Awake()
+    {
+        locked = false;
+    }
+
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerRb.drag = groundDrag;
 
-        audio = GetComponent<AudioSource>();
+        audioSource = GetComponent<AudioSource>();
+        locked = false;
     }
 
     // Update is called once per frame
@@ -85,6 +90,7 @@ public class PlayerController : MonoBehaviour
         {
             playerRb.AddForce(Vector3.forward * movementSpeed * vertical, ForceMode.Force);
         }
+
 
     }
 

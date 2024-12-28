@@ -49,7 +49,8 @@ public class EnemyController : MonoBehaviour
         if (!walkPointSet) { SearchWalkPoint();  }
         if (walkPointSet)
         {
-
+            transform.LookAt(walkPoint);
+            rigidBody.AddForce(Vector3.forward * speed, ForceMode.Force);
         }
 
         Vector3 distanceToWalkpoint = transform.position - walkPoint;
@@ -65,17 +66,17 @@ public class EnemyController : MonoBehaviour
         walkPoint = new Vector3(transform.position.x + randomX, 0, 0);
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) { walkPointSet = true; }
+        Debug.Log("found waypoint");
     }
 
     public void Chasing()
     {
         transform.LookAt(player.transform);
-        navAgent.SetDestination(player.transform.position);
+        rigidBody.AddForce(Vector3.forward, ForceMode.Force);
     }
 
     public void Attacking()
     {
-        navAgent.SetDestination(transform.position);
         transform.LookAt(player.transform);
 
         if (!alreadyAttacked)
