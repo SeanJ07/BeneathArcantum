@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour
         {
             Physics.gravity = new Vector3(0, -25, 0);
         }
-
+        
 
     }
 
@@ -90,12 +90,35 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         playerRb.AddForce(Vector3.right * movementSpeed * horizontal, ForceMode.Force);
-
+        if(horizontal != 0)
+        {
+            playerWalking = true;
+        }
+        else
+        {
+            playerWalking = false;
+        }
         if (topdownView)
         {
             playerRb.AddForce(Vector3.forward * movementSpeed * vertical, ForceMode.Force);
+            if(vertical != 0)
+            {
+                playerWalking = true;
+            }
+            else
+            {
+                playerWalking = false;
+            }
         }
-        
+        /*if (playerWalking && grounded)
+        {
+            audioSource.PlayOneShot(walking);
+        }
+        else
+        {
+            audioSource.Stop();
+        } audio for walking. doesnt work because it plays too fast. need to slow it down somehow.*/ 
+
 
     }
 
