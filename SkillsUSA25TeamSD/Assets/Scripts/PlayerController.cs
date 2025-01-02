@@ -110,14 +110,14 @@ public class PlayerController : MonoBehaviour
                 playerWalking = false;
             }
         }
-        /*if (playerWalking && grounded)
+        if (playerWalking && grounded)
         {
             audioSource.PlayOneShot(walking);
         }
         else
         {
             audioSource.Stop();
-        } audio for walking. doesnt work because it plays too fast. need to slow it down somehow.*/ 
+        } 
 
 
     }
