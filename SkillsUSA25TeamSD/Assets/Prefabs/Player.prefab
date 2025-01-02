@@ -255,9 +255,10 @@ MonoBehaviour:
   groundDrag: 2
   onWall: 0
   topdownView: 0
+  playerWalking: 0
   hurt: {fileID: 8300000, guid: f8c0c0d3ce3167b47b8b814b69addd5d, type: 3}
   collect: {fileID: 8300000, guid: 8813818c1254a0d4396f163c2ab016f3, type: 3}
-  waking: {fileID: 8300000, guid: cf1de3a383eebc849b4d8f1fe9dddc88, type: 3}
+  walking: {fileID: 8300000, guid: 895bfcfcfb888724592b1617bbcf443d, type: 3}
 --- !u!82 &5538789668590807170
 AudioSource:
   m_ObjectHideFlags: 0

@@ -8236,7 +8236,7 @@ PrefabInstance:
     - target: {fileID: 764862538888113372, guid: d3e442bdf8242fe49bb5cd9fbafc7dc3, type: 3}
       propertyPath: walking
       value: 
-      objectReference: {fileID: 8300000, guid: cf1de3a383eebc849b4d8f1fe9dddc88, type: 3}
+      objectReference: {fileID: 8300000, guid: 895bfcfcfb888724592b1617bbcf443d, type: 3}
     - target: {fileID: 764862538888113373, guid: d3e442bdf8242fe49bb5cd9fbafc7dc3, type: 3}
       propertyPath: m_Mass
       value: 1
