@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     public bool topdownView;
 
     public bool playerWalking;
+
+    float walkSoundCd = .5f;
     private AudioSource audioSource;
     public AudioClip hurt;
     public AudioClip collect;
@@ -110,9 +112,18 @@ public class PlayerController : MonoBehaviour
                 playerWalking = false;
             }
         }
+
         if (playerWalking && grounded)
         {
-            audioSource.PlayOneShot(walking);
+            walkSoundCd -= Time.deltaTime;
+
+            if (walkSoundCd <= 0)
+            {
+
+                audioSource.PlayOneShot(walking);
+                walkSoundCd = 0.5f;
+            }
+
         }
         else
         {
@@ -121,6 +132,7 @@ public class PlayerController : MonoBehaviour
 
 
     }
+
 
     private void Jump()
     {

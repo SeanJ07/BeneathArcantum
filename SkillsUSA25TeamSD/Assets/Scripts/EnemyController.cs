@@ -15,8 +15,9 @@ public class EnemyController : MonoBehaviour
     private Rigidbody rigidBody;
 
     [Header("Droning")]
+    public int currentWalkpointNumber;
     public Vector3 walkPoint;
-    bool walkPointSet;
+    public bool walkPointSet;
     public float walkPointRange;
 
     [Header("Attack")]
@@ -30,40 +31,45 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>(); // finds the player and references it
-        rigidBody = GetComponent<Rigidbody>();
+        navAgent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        if (!playerInSightRange && !playerInAttackRange) { Droning();  }
+        if (!playerInSightRange && !playerInAttackRange) { Droning(); }
         if (playerInSightRange && !playerInAttackRange) { Chasing(); }
         if (playerInSightRange && playerInAttackRange) { Attacking(); }
     }
 
     public void Droning()
     {
-        if (!walkPointSet) { SearchWalkPoint();  }
+        if (!walkPointSet)
+        {
+            SearchWalkPoint();
+        }
+
         if (walkPointSet)
         {
-            transform.LookAt(walkPoint);
-            rigidBody.AddForce(Vector3.forward * speed, ForceMode.Force);
+            navAgent.SetDestination(walkPoint);
         }
 
         Vector3 distanceToWalkpoint = transform.position - walkPoint;
-        if (distanceToWalkpoint.magnitude < 1f)
+
+        if (distanceToWalkpoint.magnitude < 1)
         {
             walkPointSet = false;
         }
+
     }
 
     private void SearchWalkPoint()
     {
         float randomX = Random.Range(-walkPointRange, walkPointRange);
-        walkPoint = new Vector3(transform.position.x + randomX, 0, 0);
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, 0);
 
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) { walkPointSet = true; }
         Debug.Log("found waypoint");
@@ -71,12 +77,13 @@ public class EnemyController : MonoBehaviour
 
     public void Chasing()
     {
-        transform.LookAt(player.transform);
-        rigidBody.AddForce(Vector3.forward, ForceMode.Force);
+        navAgent.SetDestination(player.transform.position);
     }
 
     public void Attacking()
     {
+        navAgent.SetDestination(player.transform.position);
+
         transform.LookAt(player.transform);
 
         if (!alreadyAttacked)
