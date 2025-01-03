@@ -21,6 +21,6 @@ public class DoorOpening : MonoBehaviour
     public void DoorOpen()
     {
         Vector3 currentTransform = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-        transform.Translate(new Vector3(0,-20,0) * speed * Time.deltaTime);
+        transform.Translate(new Vector3(0, -50, 0) * speed * Time.deltaTime);
     }
 }

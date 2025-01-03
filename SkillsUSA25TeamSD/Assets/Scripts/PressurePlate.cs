@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PressurePlate : MonoBehaviour
 {
     public GameObject player;
     public bool activated;
+    public bool weighted;
     public Material unactivatedMaterial;
     public Material activatedMaterial;
 
     public GameObject connectedObject;
+    public UnityEvent onActivated;
+    public UnityEvent onUnactivated;
 
     private MeshRenderer render;
 
@@ -25,30 +29,43 @@ public class PressurePlate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject == player)
-        {
-            activated = true;
-            render.material = activatedMaterial;
-            
-            if (connectedObject.CompareTag("Door"))
-            {
-                connectedObject.GetComponent<DoorOpening>().DoorOpen();
-            }
+        activated = true;
+        render.material = activatedMaterial;
 
-            if (connectedObject.CompareTag("MovingPlatform"))
+        if (connectedObject.CompareTag("Door"))
+        {
+            connectedObject.GetComponent<DoorOpening>().DoorOpen();
+        }
+
+        if (connectedObject.CompareTag("MovingPlatform"))
+        {
+            if (connectedObject.GetComponent<MovingPlatform>().enabled == false)
             {
-                if (connectedObject.GetComponent<MovingPlatform>().enabled == false)
-                {
-                    connectedObject.GetComponent<MovingPlatform>().enabled = true;
-                }
+                connectedObject.GetComponent<MovingPlatform>().enabled = true;
             }
+        }
+        else
+        {
+            onActivated.Invoke();
+        }
+
+    }
+
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (weighted)
+        {
+            activated = false;
+            render.material = unactivatedMaterial;
+            onUnactivated.Invoke();
         }
     }
 
-   
+
 }

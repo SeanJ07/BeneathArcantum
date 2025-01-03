@@ -1,18 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class SceneStuff : MonoBehaviour
 {
+    public Image sceneTransitioner;
     public Image SceneTransitionObject;
     public GameObject StartScreen;
 
 
+    public SceneAsset sceneToTransition;
+
+
     private void Awake()
     {
-        SceneTransitionObject.gameObject.SetActive(true);
+        if (SceneTransitionObject == null)
+        {
+            SceneTransitionObject = Instantiate(sceneTransitioner);
+            SceneTransitionObject.gameObject.SetActive(true);
+        }
         if (StartScreen != null) { StartScreen.SetActive(true); } else { return; } //if startscreen is assigned in inspector, enable it, else just dont.
     }
 
@@ -26,7 +35,7 @@ public class SceneStuff : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public IEnumerator SceneTransitioningIn() // Fading to black screen when transitioning to other scenes
@@ -66,6 +75,18 @@ public class SceneStuff : MonoBehaviour
     public void StartSandbox()
     {
         StartCoroutine(StartSandboxCoroutine());
+    }
+
+    public IEnumerator GoToScene()
+    {
+        StartCoroutine(SceneTransitioningIn());
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(sceneToTransition.name);
+    }
+
+    public void SceneTransitioner()
+    {
+        StartCoroutine(GoToScene());
     }
 
 

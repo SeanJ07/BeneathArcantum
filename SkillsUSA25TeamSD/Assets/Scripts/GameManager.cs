@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,6 +42,7 @@ public class GameManager : MonoBehaviour
         player.transform.position = new Vector3(startPoint.transform.position.x, startPoint.transform.position.y, player.transform.position.z);
         currentCheckpoint = startPoint.gameObject;
         gameAudio = Camera.main.GetComponent<AudioSource>();
+
     }
 
     // Update is called once per frame
@@ -63,7 +65,9 @@ public class GameManager : MonoBehaviour
         }
         else if (threeDCam == true)
         {
-            mainCam.transform.position = playerPosition + new Vector3(0, 8, -10);
+            float horizontal = Input.GetAxis("Horizontal2");
+
+            mainCam.transform.position = playerPosition + new Vector3(0 + horizontal, 8, -10);
             mainCam.transform.rotation =  Quaternion.Euler(45, 0, 0);
         }
     }
