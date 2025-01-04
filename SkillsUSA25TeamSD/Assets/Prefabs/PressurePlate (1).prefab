@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2218928583606783086}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -24, y: -44.5, z: 0}
-  m_LocalScale: {x: 5, y: 1, z: 5}
+  m_LocalScale: {x: 5, y: 0.35, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6878571931937269283}
@@ -113,9 +113,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   activated: 0
+  weighted: 0
   unactivatedMaterial: {fileID: 2100000, guid: 78b1587e2d83e0d4d95218957330f2d2, type: 2}
   activatedMaterial: {fileID: 2100000, guid: a49aad6c79599ba46a1424b01f1f189d, type: 2}
   connectedObject: {fileID: 0}
+  onActivated:
+    m_PersistentCalls:
+      m_Calls: []
+  onUnactivated:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &8496051926560903270
 GameObject:
   m_ObjectHideFlags: 0

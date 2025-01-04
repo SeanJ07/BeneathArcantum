@@ -25,11 +25,24 @@ public class PlayerController : MonoBehaviour
 
     public bool playerWalking;
 
-    float walkSoundCd = .5f;
+    
+
+    [Header("Player Stats")]
+    public float health = 100;
+
+    [Header("Enemy Interactions")]
+    public float damage;
+    public float hitCooldown;
+    private bool alreadyHit;
+
+    [Header("Sound Settings")]
+    public AudioClip attackingSFX;
     private AudioSource audioSource;
     public AudioClip hurt;
     public AudioClip collect;
     public AudioClip walking; //not sure how to code the walking since i dont want it to play in the air
+
+    float walkSoundCd = .5f;
 
     private void Awake()
     {
@@ -71,7 +84,15 @@ public class PlayerController : MonoBehaviour
         {
             Physics.gravity = new Vector3(0, -25, 0);
         }
-        
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            if (!alreadyHit)
+            {
+                StartCoroutine(AttackSequence());
+            }
+        }
+
 
     }
 
@@ -163,5 +184,16 @@ public class PlayerController : MonoBehaviour
     {
         playerRb.velocity = new Vector3(0, 0, 0);
         locked = !locked;
+    }
+
+    public IEnumerator AttackSequence()
+    {
+        // ATTACK CODE
+
+        audioSource.PlayOneShot(attackingSFX);
+        alreadyHit = true;
+        yield return new WaitForSeconds(hitCooldown);
+
+        alreadyHit = false;
     }
 }
