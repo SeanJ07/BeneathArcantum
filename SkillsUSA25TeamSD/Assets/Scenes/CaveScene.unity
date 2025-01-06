@@ -5651,7 +5651,7 @@ MonoBehaviour:
   textOutput: {fileID: 1502201667}
   currentMessage: 0
   currentLetter: 0
-  textDelay: 0.05
+  textDelay: 0.015
   endEvent:
     m_PersistentCalls:
       m_Calls:
@@ -8304,11 +8304,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2124251107, guid: d3e442bdf8242fe49bb5cd9fbafc7dc3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1
+      value: 0.014
       objectReference: {fileID: 0}
     - target: {fileID: 2124251109, guid: d3e442bdf8242fe49bb5cd9fbafc7dc3, type: 3}
       propertyPath: m_Range
-      value: 7
+      value: 35
       objectReference: {fileID: 0}
     - target: {fileID: 2124251109, guid: d3e442bdf8242fe49bb5cd9fbafc7dc3, type: 3}
       propertyPath: m_Intensity
