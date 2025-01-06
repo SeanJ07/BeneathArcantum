@@ -10,6 +10,7 @@ public class SceneStuff : MonoBehaviour
     public Image sceneTransitioner;
     public Image SceneTransitionObject;
     public GameObject StartScreen;
+    public GameObject Canvas;
 
 
     public SceneAsset sceneToTransition;
@@ -19,7 +20,8 @@ public class SceneStuff : MonoBehaviour
     {
         if (SceneTransitionObject == null)
         {
-            SceneTransitionObject = Instantiate(sceneTransitioner);
+            SceneTransitionObject = Instantiate(sceneTransitioner, Canvas.transform);
+            SceneTransitionObject.rectTransform.anchoredPosition = new Vector3(0, 0, 0);
             SceneTransitionObject.gameObject.SetActive(true);
         }
         if (StartScreen != null) { StartScreen.SetActive(true); } else { return; } //if startscreen is assigned in inspector, enable it, else just dont.

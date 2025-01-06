@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,9 +27,11 @@ public class PlayerController : MonoBehaviour
 
     public bool playerWalking;
 
-    
+
 
     [Header("Player Stats")]
+    public Image healthBar;
+    public TextMeshProUGUI healthText;
     public float health = 100;
 
     [Header("Enemy Interactions")]
@@ -85,12 +89,18 @@ public class PlayerController : MonoBehaviour
             Physics.gravity = new Vector3(0, -25, 0);
         }
 
-        if (Input.GetMouseButtonDown(1))
+        
+        if (Input.GetMouseButtonDown(0))
         {
             if (!alreadyHit)
             {
                 StartCoroutine(AttackSequence());
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            UpdateHealth(-5);
         }
 
 
@@ -189,11 +199,24 @@ public class PlayerController : MonoBehaviour
     public IEnumerator AttackSequence()
     {
         // ATTACK CODE
-
+        Debug.Log("Attacked");
         audioSource.PlayOneShot(attackingSFX);
         alreadyHit = true;
         yield return new WaitForSeconds(hitCooldown);
 
         alreadyHit = false;
+    }
+
+    public void Push()
+    {
+
+    }
+
+    public void UpdateHealth(float addedHealth)
+    {
+        health += addedHealth;
+
+        healthBar.fillAmount = health / 100;
+        healthText.text = health + "/100";
     }
 }
