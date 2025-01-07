@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [Header("UI")]
-    
     public Camera mainCam;
     public GameObject pauseScreen;
     public GameObject levelCompletedScreen;

@@ -48,18 +48,13 @@ public class PlayerController : MonoBehaviour
 
     float walkSoundCd = .5f;
 
-    private void Awake()
-    {
-        locked = false;
-    }
-
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
         playerRb.drag = groundDrag;
 
         audioSource = GetComponent<AudioSource>();
-        locked = false;
+        UnlockPlayer();
     }
 
     // Update is called once per frame
@@ -96,11 +91,6 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(AttackSequence());
             }
-        }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            UpdateHealth(-5);
         }
 
 
@@ -190,11 +180,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void ChangeLockedStatus()
+    public void LockPlayer()
     {
         playerRb.velocity = new Vector3(0, 0, 0);
-        locked = !locked;
+        locked = true;
     }
+
+    public void UnlockPlayer() { locked = false; }
 
     public IEnumerator AttackSequence()
     {
