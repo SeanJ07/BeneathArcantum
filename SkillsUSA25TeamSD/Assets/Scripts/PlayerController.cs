@@ -1,54 +1,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("Movement")]
+    [Header("Movement")] // Variables that concern movement
     public float movementSpeed = 50f;
     public float jumpForce = 20f;
     private float gravMultiplier = 1;
     public bool locked = false;
-
+    public bool playerWalking;
     Rigidbody playerRb;
 
-    [Header("Ground Check")]
+    public bool topdownView;
+
+    [Header("Ground Check")] // Checks for things like ground, in order for jumping.
     public float playerHeight;
     public LayerMask whatIsGround;
     public bool grounded;
     public float groundDrag;
 
-    [Header("Wall Interactions")]
+    [Header("Wall Interactions")] // Checks if the player is on walls.
     public bool onWall;
 
-    public bool topdownView;
-
-    public bool playerWalking;
 
 
 
-    [Header("Player Stats")]
+    [Header("Player Stats")] // Player stats such as health and inventory
     public Image healthBar;
     public TextMeshProUGUI healthText;
     public float health = 100;
 
-    [Header("Enemy Interactions")]
+    [Header("Enemy Interactions")] // Player stats concerning enemies
     public float damage;
     public float hitCooldown;
     private bool alreadyHit;
 
-    [Header("Sound Settings")]
+    [Header("Sound Settings")] // Player sounds
     public AudioClip attackingSFX;
     private AudioSource audioSource;
     public AudioClip hurt;
     public AudioClip collect;
-    public AudioClip walking; //not sure how to code the walking since i dont want it to play in the air
+    public AudioClip walking;
 
     float walkSoundCd = .5f;
 
-    void Start()
+    void Start() // references the components and sets the ground drag.
     {
         playerRb = GetComponent<Rigidbody>();
         playerRb.drag = groundDrag;
@@ -60,23 +60,24 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.9f, whatIsGround);
-        if (grounded)
+        if (grounded) // if the player is on the ground, add ground drag so the player doesn't slide.
         {
             playerRb.drag = groundDrag;
             gravMultiplier = 0;
         }
-        if (Input.GetKeyDown(KeyCode.Space) && grounded || (Input.GetKeyDown(KeyCode.Space) && onWall))
+
+        if (Input.GetKeyDown(KeyCode.Space) && grounded || (Input.GetKeyDown(KeyCode.Space) && onWall)) // makes it so you can jump off of walls and on the ground.
         {
             Jump();
         }
+
         if (onWall)
         {
             playerRb.drag = groundDrag / 2;
         }
         if (!grounded || !onWall)
         {
-            gravMultiplier += Time.deltaTime;
+            gravMultiplier += Mathf.Pow(Time.deltaTime, 1.2f) ;
             Physics.gravity = new Vector3(0, (-25 - gravMultiplier), 0);
         }
         else

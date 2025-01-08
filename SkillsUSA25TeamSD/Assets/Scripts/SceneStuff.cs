@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class SceneStuff : MonoBehaviour
 {
-    public Image sceneTransitioner;
-    public Image SceneTransitionObject;
+    public Image sceneTransitioner; // The prefab object used to do smooth transitions from scene to scene.
+    public Image SceneTransitionObject; // The prefab above assigned in this script.
     public GameObject StartScreen;
     public GameObject Canvas;
 
@@ -18,7 +18,7 @@ public class SceneStuff : MonoBehaviour
 
     private void Awake()
     {
-        if (SceneTransitionObject == null)
+        if (SceneTransitionObject == null) // if there isnt a scene transition object (black screen that fades) in the scene, it makes one.
         {
             SceneTransitionObject = Instantiate(sceneTransitioner, Canvas.transform);
             SceneTransitionObject.rectTransform.anchoredPosition = new Vector3(0, 0, 0);
@@ -55,38 +55,38 @@ public class SceneStuff : MonoBehaviour
         SceneTransitionObject.gameObject.SetActive(false);
     }
 
-    public IEnumerator StartGameCoroutine()
+    public IEnumerator StartGameCoroutine() // Actually transitions to the game scene
     {
         StartCoroutine(SceneTransitioningIn());
         yield return new WaitForSeconds(2f);
         SceneManager.LoadScene("MainGame");
     }
 
-    public IEnumerator StartSandboxCoroutine()
+    public IEnumerator StartSandboxCoroutine() // Actually transitions to the sandbox scene
     {
         StartCoroutine(SceneTransitioningIn());
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene("SandBox");
     }
 
-    public void StartGame()
+    public void StartGame() // Put into a void function so you can use it in unity buttons and events.
     {
         StartCoroutine(StartGameCoroutine());
     }
 
-    public void StartSandbox()
+    public void StartSandbox() // Put into a void function so you can use it in unity buttons and events.
     {
         StartCoroutine(StartSandboxCoroutine());
     }
 
-    public IEnumerator GoToScene()
+    public IEnumerator GoToScene() // Transitions to any other scene, should use this but haven't gotten the chance to change the code.
     {
         StartCoroutine(SceneTransitioningIn());
         yield return new WaitForSeconds(2);
         SceneManager.LoadScene(sceneToTransition.name);
     }
 
-    public void SceneTransitioner()
+    public void SceneTransitioner() // Put into a void function so you can use it in unity buttons and events.
     {
         StartCoroutine(GoToScene());
     }

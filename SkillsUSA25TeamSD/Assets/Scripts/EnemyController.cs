@@ -37,12 +37,12 @@ public class EnemyController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer); // these will check a spherical raycast for if the player is in range.
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
         if (!playerInSightRange && !playerInAttackRange) { Droning(); }
         if (playerInSightRange && !playerInAttackRange) { Chasing(); }
-        if (playerInSightRange && playerInAttackRange) { Attacking(); }
+        if (playerInSightRange && playerInAttackRange) { StartCoroutine(Attacking()); }
     }
 
     public void Droning()
@@ -80,21 +80,22 @@ public class EnemyController : MonoBehaviour
         navAgent.SetDestination(player.transform.position);
     }
 
-    public void Attacking()
+    public IEnumerator Attacking()
     {
         navAgent.SetDestination(player.transform.position);
-
         transform.LookAt(player.transform);
 
         if (!alreadyAttacked)
         {
 
-            // ATTACK CODE
-
+            player.UpdateHealth(-damage);
             alreadyAttacked = true;
-            Invoke("ResetAttack", attackSpeed);
-
+            yield return new WaitForSeconds(attackSpeed);
+            ResetAttack();
         }
+
+
+
     }
 
     private void ResetAttack()
