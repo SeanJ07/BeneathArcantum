@@ -250,7 +250,7 @@ MonoBehaviour:
   attackingSFX: {fileID: 0}
   hurt: {fileID: 8300000, guid: f8c0c0d3ce3167b47b8b814b69addd5d, type: 3}
   collect: {fileID: 8300000, guid: 8813818c1254a0d4396f163c2ab016f3, type: 3}
-  walking: {fileID: 8300000, guid: 895bfcfcfb888724592b1617bbcf443d, type: 3}
+  walking: {fileID: 8300000, guid: ae00a1493b27b6c4d91737808546dfcc, type: 3}
 --- !u!82 &5538789668590807170
 AudioSource:
   m_ObjectHideFlags: 0
