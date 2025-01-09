@@ -32,12 +32,13 @@ public class PlayerController : MonoBehaviour
     [Header("Player Stats")] // Player stats such as health and inventory
     public Image healthBar;
     public TextMeshProUGUI healthText;
-    public float health = 100;
+    public float health = 10; 
 
     [Header("Enemy Interactions")] // Player stats concerning enemies
     public float damage;
     public float hitCooldown;
     private bool alreadyHit;
+    public GameObject deathScreen;
 
     [Header("Sound Settings")] // Player sounds
     public AudioClip attackingSFX;
@@ -55,6 +56,11 @@ public class PlayerController : MonoBehaviour
 
         audioSource = GetComponent<AudioSource>();
         UnlockPlayer();
+
+        if (deathScreen != null)
+        {
+            deathScreen.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -209,7 +215,17 @@ public class PlayerController : MonoBehaviour
     {
         health += addedHealth;
 
-        healthBar.fillAmount = health / 100;
-        healthText.text = health + "/100";
+        healthBar.fillAmount = health / 10;
+        healthText.text = health + "/10";
+
+        if (health <= 0)
+        {
+            if (deathScreen != null)
+            {
+                deathScreen.SetActive(true);
+                Time.timeScale = 0;
+            }
+        }
+
     }
 }
