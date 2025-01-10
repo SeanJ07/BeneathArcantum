@@ -5900,5 +5900,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: HealthBarFrame
       objectReference: {fileID: 0}
+    - target: {fileID: 6017121649968587929, guid: 4ff1de79e1cfa9d4a998fdeea1349068, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4ff1de79e1cfa9d4a998fdeea1349068, type: 3}
