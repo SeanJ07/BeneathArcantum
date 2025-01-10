@@ -8,7 +8,7 @@ public class DamagableCube : MonoBehaviour
     private GameManager gameManager;
     private SceneStuff sceneManager;
 
-
+    public float damage = 1;
     private void Awake()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
@@ -20,6 +20,7 @@ public class DamagableCube : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             other.transform.position = gameManager.currentCheckpoint.transform.position;
+            other.GetComponent<PlayerController>().UpdateHealth(-damage);
         }
     }
 }
