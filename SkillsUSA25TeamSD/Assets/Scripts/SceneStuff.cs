@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class SceneStuff : MonoBehaviour
+public class SceneAsset : MonoBehaviour
 {
     public Image sceneTransitioner; // The prefab object used to do smooth transitions from scene to scene.
     public Image SceneTransitionObject; // The prefab above assigned in this script.

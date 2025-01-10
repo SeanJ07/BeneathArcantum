@@ -6,13 +6,13 @@ public class DamagableCube : MonoBehaviour
 {
 
     private GameManager gameManager;
-    private SceneStuff sceneManager;
+    private SceneAsset sceneManager;
 
     public float damage = 1;
     private void Awake()
     {
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        sceneManager = GameObject.Find("GameManager").GetComponent<SceneStuff>();
+        sceneManager = GameObject.Find("GameManager").GetComponent<SceneAsset>();
     }
     // Start is called before the first frame update
     void OnTriggerEnter(Collider other)
