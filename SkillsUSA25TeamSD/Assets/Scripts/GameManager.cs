@@ -101,7 +101,6 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Finished Level");
         levelCompletedScreen.gameObject.SetActive(true);
-        levelCompletedText.text = "Level " + level + " Completed!";
         gameAudio.PlayOneShot(win);
         level += 1;
         player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
