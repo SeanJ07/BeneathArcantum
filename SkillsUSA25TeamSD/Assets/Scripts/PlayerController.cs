@@ -32,13 +32,13 @@ public class PlayerController : MonoBehaviour
     [Header("Player Stats")] // Player stats such as health and inventory
     public Image healthBar;
     public TextMeshProUGUI healthText;
+    public float maxHealth;
     public float health = 10; 
 
     [Header("Enemy Interactions")] // Player stats concerning enemies
     public float damage;
     public float hitCooldown;
     private bool alreadyHit;
-    public GameObject deathScreen;
 
     [Header("Sound Settings")] // Player sounds
     public AudioClip attackingSFX;
@@ -49,17 +49,20 @@ public class PlayerController : MonoBehaviour
 
     float walkSoundCd = .5f;
 
+    private GameManager gameManager;
+
     void Start() // references the components and sets the ground drag.
     {
+        maxHealth = health;
         playerRb = GetComponent<Rigidbody>();
         playerRb.drag = groundDrag;
-
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         audioSource = GetComponent<AudioSource>();
         UnlockPlayer();
 
-        if (deathScreen != null)
+        if (gameManager.deathScreen != null)
         {
-            deathScreen.SetActive(false);
+            gameManager.deathScreen.SetActive(false);
         }
     }
 
@@ -220,9 +223,9 @@ public class PlayerController : MonoBehaviour
 
         if (health <= 0)
         {
-            if (deathScreen != null)
+            if (gameManager.deathScreen != null)
             {
-                deathScreen.SetActive(true);
+                gameManager.deathScreen.SetActive(true);
                 Time.timeScale = 0;
             }
         }

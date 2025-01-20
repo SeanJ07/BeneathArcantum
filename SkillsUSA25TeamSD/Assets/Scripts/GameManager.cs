@@ -8,19 +8,23 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     [Header("UI")]
+    public SceneStuff sceneStuff;
     public Camera mainCam;
     public GameObject pauseScreen;
     public GameObject levelCompletedScreen;
     public TextMeshProUGUI levelCompletedText;
 
+    public GameObject deathScreen;
+
     [Header("GameObjects")]
     GameObject player;
-    public GameObject currentCheckpoint;
 
 
     [Header("Checkpoints")]
     public GameObject startPoint;
     public GameObject endPoint;
+    public GameObject currentCheckpoint;
+    private float respawnTransitionTimer;
 
     [Header("StoredInfo")]
     private int level = 1;
@@ -32,6 +36,8 @@ public class GameManager : MonoBehaviour
     public AudioClip win;
     public AudioClip lose;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +47,7 @@ public class GameManager : MonoBehaviour
         player.transform.position = new Vector3(startPoint.transform.position.x, startPoint.transform.position.y, player.transform.position.z);
         currentCheckpoint = startPoint.gameObject;
         gameAudio = Camera.main.GetComponent<AudioSource>();
+        sceneStuff = GameObject.Find("GameManager").GetComponent<SceneStuff>();
 
     }
 
@@ -106,6 +113,21 @@ public class GameManager : MonoBehaviour
         player.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
         player.GetComponent<PlayerController>().enabled = false;
         
+    }
+
+    public void Respawn()
+    {
+        StartCoroutine(RespawnIEnumerator());
+    }
+    public IEnumerator RespawnIEnumerator()
+    {
+        Time.timeScale = 1f;
+        yield return new WaitForSeconds(0.5f);
+        StartCoroutine(sceneStuff.SceneTransitioningIn());
+        yield return new WaitForSeconds(2f);
+        player.GetComponent<PlayerController>().UpdateHealth(player.GetComponent<PlayerController>().maxHealth);
+        player.transform.position = currentCheckpoint.transform.position;
+        StartCoroutine(sceneStuff.SceneTransitioningOut());
     }
     
 }

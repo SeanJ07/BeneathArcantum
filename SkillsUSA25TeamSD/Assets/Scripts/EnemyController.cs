@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer); // these will check a spherical raycast for if the player is in range.
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
