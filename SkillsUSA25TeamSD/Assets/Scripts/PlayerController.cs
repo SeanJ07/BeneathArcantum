@@ -33,7 +33,9 @@ public class PlayerController : MonoBehaviour
     public Image healthBar;
     public TextMeshProUGUI healthText;
     public float maxHealth;
-    public float health = 10; 
+    public float health = 10;
+    private SkinsManager skinsManager;
+    private Renderer renderThing;
 
     [Header("Enemy Interactions")] // Player stats concerning enemies
     public float damage;
@@ -51,13 +53,19 @@ public class PlayerController : MonoBehaviour
 
     private GameManager gameManager;
 
-    void Start() // references the components and sets the ground drag.
+    private void Awake() //References all components.
     {
-        maxHealth = health;
-        playerRb = GetComponent<Rigidbody>();
-        playerRb.drag = groundDrag;
+        skinsManager = GameObject.Find("SkinsStorage").GetComponent<SkinsManager>();
+        renderThing = GetComponent<Renderer>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         audioSource = GetComponent<AudioSource>();
+        playerRb = GetComponent<Rigidbody>();
+    }
+    void Start() // references the components and sets the ground drag.
+    {
+        renderThing.material = skinsManager.playerSkin;
+        maxHealth = health;
+        playerRb.drag = groundDrag;
         UnlockPlayer();
 
         if (gameManager.deathScreen != null)
@@ -86,7 +94,7 @@ public class PlayerController : MonoBehaviour
         }
         if (!grounded || !onWall)
         {
-            gravMultiplier += Mathf.Pow(Time.deltaTime, 1.2f) ;
+            gravMultiplier += Mathf.Pow(Time.deltaTime, 1.4f) ;
             Physics.gravity = new Vector3(0, (-25 - gravMultiplier), 0);
         }
         else

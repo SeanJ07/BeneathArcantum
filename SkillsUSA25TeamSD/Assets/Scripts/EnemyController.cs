@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
+    [Header("Enemy Stats")]
     public float speed = 10f;
     public float damage = 5f;
+    public float health = 10f;
 
     public NavMeshAgent navAgent;
     public LayerMask whatIsGround, whatIsPlayer;
@@ -26,6 +29,9 @@ public class EnemyController : MonoBehaviour
 
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
+
+    [Header("UI")]
+    public Image healthBar;
 
     // Start is called before the first frame update
     void Start()
@@ -71,7 +77,7 @@ public class EnemyController : MonoBehaviour
         float randomX = Random.Range(-walkPointRange, walkPointRange);
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, 0);
 
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround)) { walkPointSet = true; }
+        if (Physics.Raycast(walkPoint, -transform.up, 3f, whatIsGround)) { walkPointSet = true; }
         Debug.Log("found waypoint");
     }
 
@@ -101,5 +107,29 @@ public class EnemyController : MonoBehaviour
     private void ResetAttack()
     {
         alreadyAttacked = false;
+    }
+
+    private void OnMouseOver()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (Vector3.Distance(this.transform.position, player.gameObject.transform.position) < 10)
+            {
+                UpdateHealth(health -= player.damage);
+            }
+        }
+    }
+
+    public void UpdateHealth(float addedHealth)
+    {
+        health += addedHealth;
+
+        healthBar.fillAmount = health / 10;
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+
     }
 }
