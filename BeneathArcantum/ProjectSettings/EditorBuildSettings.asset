@@ -17,7 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SandBox.unity
     guid: 0f861f863209de548a38faf99eeb9908
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/CliffScene.unity
     guid: 1905690c4a21fea47a785d40baa3316c
   m_configObjects: {}
