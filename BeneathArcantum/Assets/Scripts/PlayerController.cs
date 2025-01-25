@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
     public float damage;
     public float hitCooldown;
     private bool alreadyHit;
+    public float hitDistance;
+    public LayerMask enemyLayer;
 
     [Header("Sound Settings")] // Player sounds
     public AudioClip attackingSFX;
@@ -63,7 +65,6 @@ public class PlayerController : MonoBehaviour
     }
     void Start() // references the components and sets the ground drag.
     {
-        renderThing.material = skinsManager.playerSkin;
         maxHealth = health;
         playerRb.drag = groundDrag;
         UnlockPlayer();
@@ -72,6 +73,8 @@ public class PlayerController : MonoBehaviour
         {
             gameManager.deathScreen.SetActive(false);
         }
+
+        renderThing.material = skinsManager.playerSkin;
     }
 
     // Update is called once per frame
@@ -109,6 +112,12 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(AttackSequence());
             }
+        }
+
+        if (health > maxHealth)
+        {
+            float excess = health - maxHealth;
+            UpdateHealth(-excess);
         }
 
 
@@ -198,6 +207,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Heal"))
+        {
+            if (health != maxHealth)
+            {
+                UpdateHealth(10);
+                Destroy(other.gameObject);
+            }
+        }
+    }
+
     public void LockPlayer()
     {
         playerRb.velocity = new Vector3(0, 0, 0);
@@ -210,6 +231,19 @@ public class PlayerController : MonoBehaviour
     {
         // ATTACK CODE
         Debug.Log("Attacked");
+        Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
+        RaycastHit hit;
+        if (Physics.Raycast(this.transform.position, mousePos, out hit, 5))
+        {
+            if (hit.collider.gameObject.CompareTag("Enemy"))
+            {
+                Debug.Log("enemy hit");
+                GameObject enemyToDestroy = hit.collider.gameObject;
+                Destroy(enemyToDestroy);
+            }
+        }
+
+
         audioSource.PlayOneShot(attackingSFX);
         alreadyHit = true;
         yield return new WaitForSeconds(hitCooldown);

@@ -121,6 +121,7 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator RespawnIEnumerator()
     {
+        
         Time.timeScale = 1f;
         yield return new WaitForSeconds(0.5f);
         StartCoroutine(sceneStuff.SceneTransitioningIn());
@@ -128,6 +129,8 @@ public class GameManager : MonoBehaviour
         player.GetComponent<PlayerController>().UpdateHealth(player.GetComponent<PlayerController>().maxHealth);
         player.transform.position = currentCheckpoint.transform.position;
         StartCoroutine(sceneStuff.SceneTransitioningOut());
+        Debug.Log("5");
+        Time.timeScale = 1f;
     }
     
 }

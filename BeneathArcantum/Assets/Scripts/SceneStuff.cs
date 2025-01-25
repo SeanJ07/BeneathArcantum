@@ -12,7 +12,7 @@ public class SceneStuff : MonoBehaviour
     public GameObject StartScreen;
     public GameObject Canvas;
 
-    public SceneStuff sceneToTransition;
+    public SceneAsset sceneToTransition;
 
 
     private void Awake()
@@ -48,6 +48,7 @@ public class SceneStuff : MonoBehaviour
 
     public IEnumerator SceneTransitioningOut() // Fading out of black screen when entering a different scene
     {
+        Debug.Log("oom");
         yield return new WaitForSeconds(0.5f);
         SceneTransitionObject.GetComponent<Animator>().Play("FadingOut");
         yield return new WaitForSeconds(2f);

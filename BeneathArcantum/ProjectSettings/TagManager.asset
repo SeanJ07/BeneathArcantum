@@ -11,6 +11,8 @@ TagManager:
   - Door
   - MovingPlatform
   - TextInteractible
+  - Heal
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -21,8 +23,8 @@ TagManager:
   - Ground
   - Outline Objects
   - Player
-  - 
-  - 
+  - Enemy
+  - Heal
   - 
   - 
   - 
