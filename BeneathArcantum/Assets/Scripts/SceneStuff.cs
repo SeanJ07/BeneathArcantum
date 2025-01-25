@@ -12,7 +12,7 @@ public class SceneStuff : MonoBehaviour
     public GameObject StartScreen;
     public GameObject Canvas;
 
-    public SceneAsset sceneToTransition;
+    public SceneStuff sceneToTransition;
 
 
     private void Awake()

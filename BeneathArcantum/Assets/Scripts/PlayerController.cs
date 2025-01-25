@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake() //References all components.
     {
-        skinsManager = GameObject.Find("SkinsStorage").GetComponent<SkinsManager>();
+        
         renderThing = GetComponent<Renderer>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         audioSource = GetComponent<AudioSource>();
