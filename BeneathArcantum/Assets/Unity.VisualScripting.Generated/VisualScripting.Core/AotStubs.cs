@@ -1260,8 +1260,8 @@ namespace Unity.VisualScripting.Generated.Aot
 	// --------------- Asset Stubs
 	// --------------- Scene Stubs
 	// UnityEngine.GameObject.SetActive
-	// UnityEngine.GameObject.Destroy
 	// UnityEngine.Animation.Play
+	// UnityEngine.GameObject.Destroy
 	// UnityEngine.SceneManagement.SceneManager.LoadScene
 	// TMPro.TextMeshProUGUI.text
 	// UnityEngine.Screen.fullScreen
@@ -15789,17 +15789,6 @@ namespace Unity.VisualScripting.Generated.Aot
 			optimized.Invoke(default(object[]));
 		}
 		
-		// UnityEngine.GameObject.Destroy
-		[global::UnityEngine.Scripting.PreserveAttribute()]
-		public static void UnityEngine_GameObject_Destroy()
-		{
-			global::UnityEngine.Object arg0 = default(global::UnityEngine.Object);
-			global::UnityEngine.Object.Destroy(arg0);
-			global::Unity.VisualScripting.StaticActionInvoker<UnityEngine.Object> optimized = new global::Unity.VisualScripting.StaticActionInvoker<UnityEngine.Object>(default(global::System.Reflection.MethodInfo));
-			optimized.Invoke(null, arg0);
-			optimized.Invoke(default(object[]));
-		}
-		
 		// UnityEngine.Animation.Play
 		[global::UnityEngine.Scripting.PreserveAttribute()]
 		public static void UnityEngine_Animation_Play()
@@ -15809,6 +15798,17 @@ namespace Unity.VisualScripting.Generated.Aot
 			target.Play(arg0);
 			global::Unity.VisualScripting.InstanceFunctionInvoker<UnityEngine.Animation, string, bool> optimized = new global::Unity.VisualScripting.InstanceFunctionInvoker<UnityEngine.Animation, string, bool>(default(global::System.Reflection.MethodInfo));
 			optimized.Invoke(default(global::UnityEngine.Animation), arg0);
+			optimized.Invoke(default(object[]));
+		}
+		
+		// UnityEngine.GameObject.Destroy
+		[global::UnityEngine.Scripting.PreserveAttribute()]
+		public static void UnityEngine_GameObject_Destroy()
+		{
+			global::UnityEngine.Object arg0 = default(global::UnityEngine.Object);
+			global::UnityEngine.Object.Destroy(arg0);
+			global::Unity.VisualScripting.StaticActionInvoker<UnityEngine.Object> optimized = new global::Unity.VisualScripting.StaticActionInvoker<UnityEngine.Object>(default(global::System.Reflection.MethodInfo));
+			optimized.Invoke(null, arg0);
 			optimized.Invoke(default(object[]));
 		}
 		
