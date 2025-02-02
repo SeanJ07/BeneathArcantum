@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour
     [Header("UI")]
     public Image healthBar;
 
-    // Start is called before the first frame update
+    // https://www.youtube.com/watch?v=UjkSFoLxesw&list=PLaid5sK4sI3qk601IIeYn6SYPZAm6PKK0&index=1 
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerController>(); // finds the player and references it

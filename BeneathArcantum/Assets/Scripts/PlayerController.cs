@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
 
     private GameManager gameManager;
 
+    // https://www.youtube.com/watch?v=f473C43s8nE&list=PLaid5sK4sI3qk601IIeYn6SYPZAm6PKK0&index=2
     private void Awake() //References all components.
     {
         
