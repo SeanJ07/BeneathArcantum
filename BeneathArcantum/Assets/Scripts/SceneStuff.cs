@@ -12,8 +12,6 @@ public class SceneStuff : MonoBehaviour
     public GameObject StartScreen;
     public GameObject Canvas;
 
-    public SceneAsset sceneToTransition;
-
 
     private void Awake()
     {
@@ -79,16 +77,16 @@ public class SceneStuff : MonoBehaviour
         StartCoroutine(StartSandboxCoroutine());
     }
 
-    public IEnumerator GoToScene() // Transitions to any other scene, should use this but haven't gotten the chance to change the code.
+    public IEnumerator GoToScene(string scene) // Transitions to any other scene, should use this but haven't gotten the chance to change the code.
     {
         StartCoroutine(SceneTransitioningIn());
         yield return new WaitForSeconds(2);
-        SceneManager.LoadScene(sceneToTransition.name);
+        SceneManager.LoadScene(scene);
     }
 
-    public void SceneTransitioner() // Put into a void function so you can use it in unity buttons and events.
+    public void SceneTransitioner(string sceneName) // Put into a void function so you can use it in unity buttons and events.
     {
-        StartCoroutine(GoToScene());
+        StartCoroutine(GoToScene(sceneName));
     }
 
 

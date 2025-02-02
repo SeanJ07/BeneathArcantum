@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+    void Start() // Assigns everything, including: Player gameobject, player position, the first checkpoint, the game audiosource, and the scene manager.
     {
         player = GameObject.Find("Player");
         Time.timeScale = 1;
@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
         PauseGame();
     }
 
-    void CameraFollow()
+    void CameraFollow() // Depends on if topDown is checked in the gamemanager. makes camera follow player.
     {
         // takes the position of the player
         Vector3 playerPosition = player.transform.position;
@@ -92,19 +92,19 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0;
         }
     }
-    public void ResumeButton()
+    public void ResumeButton() // Reseumes game
     {
         pauseScreen.SetActive(false);
         Time.timeScale = 1;
     }
 
-    public void MainMenuButton()
+    public void MainMenuButton() // Loads the main menu.
     {
 
         SceneManager.LoadScene("GameMenu");
     }
 
-    public void LevelFinish()
+    public void LevelFinish() // When player reaches the final checkpoint (end point), finish the level.
     {
         Debug.Log("Finished Level");
         levelCompletedScreen.gameObject.SetActive(true);
@@ -115,11 +115,11 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void Respawn()
+    public void Respawn() // Starts the respawn ienumerator (look down further).
     {
         StartCoroutine(RespawnIEnumerator());
     }
-    public IEnumerator RespawnIEnumerator()
+    public IEnumerator RespawnIEnumerator() // Fade black and back respawn, respawns player at last checkpoint.
     {
         
         Time.timeScale = 1f;

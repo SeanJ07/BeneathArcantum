@@ -18,10 +18,9 @@ public class PressurePlate : MonoBehaviour
     private MeshRenderer render;
 
     // Start is called before the first frame update
-    void Start()
+    void Start() // Gets the mesh renderer component, sets activeness, and sets the current material.
     {
         render = GetComponent<MeshRenderer>();
-        player = GameObject.Find("Player");
         activated = false;
         render.material = unactivatedMaterial;
     }
@@ -32,7 +31,7 @@ public class PressurePlate : MonoBehaviour
 
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnCollisionEnter(Collision other) // When something collides with the pressure plate, initiate the [activated] part of the object connected to the pressure plate.
     {
         activated = true;
         render.material = activatedMaterial;
@@ -57,7 +56,7 @@ public class PressurePlate : MonoBehaviour
     }
 
 
-    private void OnCollisionExit(Collision collision)
+    private void OnCollisionExit(Collision collision) // Only applies if the pressure plate is weighted [inspector window]. If weighted, then if something stops colliding with the pressure plate, unactivate the connected object.
     {
         if (weighted)
         {

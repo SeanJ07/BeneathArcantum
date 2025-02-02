@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     public float health = 10;
     private SkinsManager skinsManager;
     private Renderer renderThing;
+    public GameObject weapon;
 
     [Header("Enemy Interactions")] // Player stats concerning enemies
     public float damage;
@@ -120,6 +121,7 @@ public class PlayerController : MonoBehaviour
             UpdateHealth(-excess);
         }
 
+        WeaponShifting();
 
     }
 
@@ -179,6 +181,21 @@ public class PlayerController : MonoBehaviour
         } 
 
 
+    }
+
+    public void WeaponShifting()
+    {
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
+
+        if (horizontal >= 0)
+        {
+            weapon.transform.localPosition = new Vector3(1, 0, 0);
+        }
+        else
+        {
+            weapon.transform.localPosition = new Vector3(-1, 0, 0);
+        }
     }
 
 
