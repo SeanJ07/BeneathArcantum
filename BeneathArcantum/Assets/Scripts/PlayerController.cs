@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
             gameManager.deathScreen.SetActive(false);
         }
 
-        renderThing.material = skinsManager.playerSkin;
+       // renderThing.material = skinsManager.playerSkin;
     }
 
     // Update is called once per frame

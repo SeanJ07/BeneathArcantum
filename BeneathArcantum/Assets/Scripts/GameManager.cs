@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     {
         player = GameObject.Find("Player");
         Time.timeScale = 1;
-        pauseScreen.SetActive(false);
+        //pauseScreen.SetActive(false);
         player.transform.position = new Vector3(startPoint.transform.position.x, startPoint.transform.position.y, player.transform.position.z);
         currentCheckpoint = startPoint.gameObject;
         gameAudio = Camera.main.GetComponent<AudioSource>();
