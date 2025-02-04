@@ -85,12 +85,7 @@ public class GameManager : MonoBehaviour
     
     public void PauseGame()
     {
-        // Pauses the game when escape is pressed.
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pauseScreen.SetActive(true);
-            Time.timeScale = 0;
-        }
+        
     }
     public void ResumeButton() // Reseumes game
     {
