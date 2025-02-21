@@ -66,7 +66,7 @@ public class GameManager : MonoBehaviour
         if (threeDCam == false)
         {
             // makes the camera follow the position of the player, but adds the additional vector3 to its position.
-            mainCam.transform.position = playerPosition + new Vector3(0, 0, camTransform);
+            mainCam.transform.position = playerPosition + new Vector3(0, 0, -25);
             mainCam.transform.rotation = new Quaternion(0, 0, 0,0);
         }
         else if (threeDCam == true)
