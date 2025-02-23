@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
@@ -56,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     private GameManager gameManager;
 
-    // https://www.youtube.com/watch?v=f473C43s8nE&list=PLaid5sK4sI3qk601IIeYn6SYPZAm6PKK0&index=2
+    // mkhttps://www.youtube.com/watch?v=f473C43s8nE&list=PLaid5sK4sI3qk601IIeYn6SYPZAm6PKK0&index=2
     private void Awake() //References all components.
     {
         
@@ -239,13 +240,16 @@ public class PlayerController : MonoBehaviour
 
     public void LockPlayer()
     {
-        playerRb.velocity = new Vector3(0, 0, 0);
+        playerRb.velocity = Vector3.zero;
         locked = true;
     }
 
-    public void UnlockPlayer() { locked = false; }
+    public void UnlockPlayer()
+    {
+        locked = false;
+    }
 
-    public IEnumerator AttackSequence()
+        public IEnumerator AttackSequence()
     {
         // ATTACK CODE
         Debug.Log("Attacked");

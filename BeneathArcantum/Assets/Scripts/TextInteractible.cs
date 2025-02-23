@@ -9,13 +9,15 @@ public class TextInteractible : MonoBehaviour
     [TextArea] public string[] messages;
     public UnityEvent onEnter;
     public UnityEvent onExit;
-    public UnityEvent onActivated;
+    public UnityEvent onStart;
+    public UnityEvent onUnactivated;
 
     public MessageList messageList;
 
     void Start()
     {
-
+        onStart.Invoke();
+        messageList.messages = messages;
     }
 
     void Update()
