@@ -123,8 +123,6 @@ public class PlayerController : MonoBehaviour
             UpdateHealth(-excess);
         }
 
-        WeaponShifting();
-
     }
 
     private void FixedUpdate()
@@ -201,11 +199,11 @@ public class PlayerController : MonoBehaviour
 
         if (horizontal > 0)
         {
-            weapon.transform.localPosition = new Vector3(1, 1, 0);
+            weapon.transform.localPosition = new Vector3(1.5f, 3, 0);
         }
         else
         {
-            weapon.transform.localPosition = new Vector3(-1, 1, 0);
+            weapon.transform.localPosition = new Vector3(-1.5f, 3, 0);
         }
     }
 
