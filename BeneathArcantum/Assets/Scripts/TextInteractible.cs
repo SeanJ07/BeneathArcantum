@@ -30,6 +30,8 @@ public class TextInteractible : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             messageList.messages = messages;
+            messageList.attatchedInteraction = this;
+            StartCoroutine(messageList.typewriterEffect());
             onEnter.Invoke();
         }
     }
@@ -40,5 +42,10 @@ public class TextInteractible : MonoBehaviour
         {
             onExit.Invoke();
         }
+    }
+
+    public void Exit()
+    {
+        onExit.Invoke();
     }
 }

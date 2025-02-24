@@ -13,6 +13,7 @@ public class MessageList : MonoBehaviour
     public float textDelay = 0.05f;
     public UnityEvent endEvent;
     private MessageList messageList;
+    public TextInteractible attatchedInteraction;
 
     [TextArea] public string[] messages;
 
@@ -50,6 +51,7 @@ public class MessageList : MonoBehaviour
         {
             currentMessage = 0;
             endEvent.Invoke();
+            attatchedInteraction.onExit.Invoke();
         }
     }
 

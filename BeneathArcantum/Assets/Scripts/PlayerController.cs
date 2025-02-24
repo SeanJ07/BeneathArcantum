@@ -147,6 +147,15 @@ public class PlayerController : MonoBehaviour
         if(horizontal != 0)
         {
             playerWalking = true;
+
+            if (horizontal < 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
+            if (horizontal > 0)
+            {
+                transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
         }
         else
         {
@@ -185,18 +194,18 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void WeaponShifting()
+    public void WeaponShifting() // Moves the weapon with the player.
     {
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        if (horizontal >= 0)
+        if (horizontal > 0)
         {
-            weapon.transform.localPosition = new Vector3(1, 0, 0);
+            weapon.transform.localPosition = new Vector3(1, 1, 0);
         }
         else
         {
-            weapon.transform.localPosition = new Vector3(-1, 0, 0);
+            weapon.transform.localPosition = new Vector3(-1, 1, 0);
         }
     }
 
