@@ -122,6 +122,8 @@ public class PlayerController : MonoBehaviour
             float excess = health - maxHealth;
             UpdateHealth(-excess);
         }
+        
+        
 
     }
 
@@ -300,6 +302,12 @@ public class PlayerController : MonoBehaviour
                 Time.timeScale = 0;
             }
         }
+
+    }
+
+    public void SetHealth()
+    {
+        UpdateHealth(10);
 
     }
 }

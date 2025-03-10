@@ -118,10 +118,11 @@ public class GameManager : MonoBehaviour
     {
         
         Time.timeScale = 1f;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.01f);
         StartCoroutine(sceneStuff.SceneTransitioningIn());
-        yield return new WaitForSeconds(2f);
-        player.GetComponent<PlayerController>().UpdateHealth(player.GetComponent<PlayerController>().maxHealth);
+        player.GetComponent<PlayerController>().SetHealth();
+        yield return new WaitForSeconds(0.5f);
+        
         player.transform.position = currentCheckpoint.transform.position;
         StartCoroutine(sceneStuff.SceneTransitioningOut());
         Debug.Log("5");
