@@ -56,14 +56,22 @@ public class MovingPlatform : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        objectTransform = GetObjectTransform(other.gameObject);
-        other.transform.SetParent(transform);
-        other.gameObject.transform.localScale = objectTransform;
+        if (other.CompareTag("Player"))
+        {
+            objectTransform = GetObjectTransform(other.gameObject);
+            other.transform.SetParent(transform);
+            other.gameObject.transform.localScale = objectTransform;
+        }
+        else { return; }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        other.transform.SetParent(null);
+        if (other.CompareTag("Player"))
+        {
+            other.transform.SetParent(null);
+        }
+        else { return;}
     }
 
     private Vector3 GetObjectTransform(GameObject other)

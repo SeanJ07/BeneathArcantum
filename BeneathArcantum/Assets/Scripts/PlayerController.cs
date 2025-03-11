@@ -27,9 +27,6 @@ public class PlayerController : MonoBehaviour
     [Header("Wall Interactions")] // Checks if the player is on walls.
     public bool onWall;
 
-
-
-
     [Header("Player Stats")] // Player stats such as health and inventory
     public Image healthBar;
     public TextMeshProUGUI healthText;
@@ -55,12 +52,15 @@ public class PlayerController : MonoBehaviour
 
     float walkSoundCd = .5f;
 
+    [Header("Animations")]
+    public Animator animator;
+    public Animation attackAnimation;
+
     private GameManager gameManager;
 
     // mkhttps://www.youtube.com/watch?v=f473C43s8nE&list=PLaid5sK4sI3qk601IIeYn6SYPZAm6PKK0&index=2
     private void Awake() //References all components.
     {
-        
         renderThing = GetComponent<Renderer>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         audioSource = GetComponent<AudioSource>();
@@ -147,6 +147,7 @@ public class PlayerController : MonoBehaviour
         if(horizontal != 0)
         {
             playerWalking = true;
+            animator.SetBool("isWalking", true);
 
             if (horizontal < 0)
             {
@@ -189,6 +190,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             audioSource.Stop();
+            animator.SetBool("isWalking", false);
         } 
 
 
@@ -262,21 +264,11 @@ public class PlayerController : MonoBehaviour
     {
         // ATTACK CODE
         Debug.Log("Attacked");
-        Vector3 mousePos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, 0);
-        RaycastHit hit;
-        if (Physics.Raycast(this.transform.position, mousePos, out hit, 5))
-        {
-            if (hit.collider.gameObject.CompareTag("Enemy"))
-            {
-                Debug.Log("enemy hit");
-                GameObject enemyToDestroy = hit.collider.gameObject;
-                Destroy(enemyToDestroy);
-            }
-        }
-
-
+        animator.SetTrigger("Attacking");
+        
         audioSource.PlayOneShot(attackingSFX);
         alreadyHit = true;
+
         yield return new WaitForSeconds(hitCooldown);
 
         alreadyHit = false;
