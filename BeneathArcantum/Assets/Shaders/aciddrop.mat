@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Acid
+  m_Name: aciddrop
   m_Shader: {fileID: -6465566751694194690, guid: 125ac3f04083fd247b9d83981ba85508, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -105,14 +105,14 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
-    - _Metallic: 0.2
+    - _Metallic: 0.4
     - _NormalsStrength: 0.12
     - _OcclusionStrength: 1
     - _Parallax: 0.005
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0.83
+    - _Smoothness: 0.84
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
@@ -123,12 +123,12 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - _BaseColor: {r: 1.6099393, g: 5.5908804, b: 1.2294083, a: 1}
+    - _BaseColor: {r: 0.5710093, g: 1.9716923, b: 0.43712044, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _NormalsSpeed: {r: 0, g: -0.75, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _VoronoiColor: {r: 0.27450982, g: 0.9647059, b: 0.101960786, a: 1}
-    - _VoronoiSpeed: {r: 0, g: 0.1, b: 0, a: 0}
-    - _VoronoiTiling: {r: 2, g: 2, b: 0, a: 0}
+    - _VoronoiSpeed: {r: 0, g: -0.1, b: 0, a: 0}
+    - _VoronoiTiling: {r: -0.23, g: -3.86, b: 0, a: 0}
   m_BuildTextureStacks: []
