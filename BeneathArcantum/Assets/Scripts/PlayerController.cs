@@ -54,7 +54,6 @@ public class PlayerController : MonoBehaviour
 
     [Header("Animations")]
     public Animator animator;
-    public Animation attackAnimation;
 
     private GameManager gameManager;
 
@@ -119,8 +118,7 @@ public class PlayerController : MonoBehaviour
 
         if (health > maxHealth)
         {
-            float excess = health - maxHealth;
-            UpdateHealth(-excess);
+            health = maxHealth;
         }
         
         
@@ -196,20 +194,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void WeaponShifting() // Moves the weapon with the player.
-    {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
-
-        if (horizontal > 0)
-        {
-            weapon.transform.localPosition = new Vector3(1.5f, 3, 0);
-        }
-        else
-        {
-            weapon.transform.localPosition = new Vector3(-1.5f, 3, 0);
-        }
-    }
+    
 
 
     private void Jump()
@@ -264,10 +249,11 @@ public class PlayerController : MonoBehaviour
     {
         // ATTACK CODE
         Debug.Log("Attacked");
-        animator.SetTrigger("Attacking");
+        animator.SetTrigger("isAttacking");
         
         audioSource.PlayOneShot(attackingSFX);
         alreadyHit = true;
+        
 
         yield return new WaitForSeconds(hitCooldown);
 
@@ -299,7 +285,7 @@ public class PlayerController : MonoBehaviour
 
     public void SetHealth()
     {
-        UpdateHealth(10);
+        UpdateHealth(maxHealth);
 
     }
 }
