@@ -7,13 +7,17 @@ using UnityEngine.UIElements;
 public class MatchWires : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerEnterHandler,IPointerUpHandler
 {
     static MatchWires hoverWire;
-
+    
     public GameObject lineObject;
+    
     public string wireName;
 
     private GameObject line;
     
-    
+    public void Start()
+    {
+        
+    }
 
     public void OnPointerDown(PointerEventData eventData)
     {
@@ -21,12 +25,12 @@ public class MatchWires : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
         line = Instantiate(lineObject, transform.position, Quaternion.identity, transform.parent.parent);
 
         //get position of point of the click
-        UpdateWire(eventData.position);
+        UpdateWire(Input.mousePosition);
     }
     public void OnDrag(PointerEventData eventData)
     {
         //updates position of wire
-        UpdateWire(eventData.position);
+        UpdateWire(Input.mousePosition);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -55,7 +59,7 @@ public class MatchWires : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
         Vector3 direction = position - transform.position;
         line.transform.right = direction;
 
-        line.transform.localScale = new Vector3(direction.magnitude/100, 1, 1);
+        line.transform.localScale = new Vector3(direction.magnitude/150, 1, 1);
     }
     // Start is called before the first frame update
     

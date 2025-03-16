@@ -48,6 +48,10 @@ public class PressurePlate : MonoBehaviour
                 connectedObject.GetComponent<MovingPlatform>().enabled = true;
             }
         }
+        /*if (connectedObject.CompareTag("WirePuzzle"))
+        {
+            connectedObject.SetActive(true);
+        }*/
         else
         {
             onActivated.Invoke();

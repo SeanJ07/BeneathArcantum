@@ -248,16 +248,20 @@ public class PlayerController : MonoBehaviour
         public IEnumerator AttackSequence()
     {
         // ATTACK CODE
-        Debug.Log("Attacked");
-        animator.SetTrigger("isAttacking");
-        
-        audioSource.PlayOneShot(attackingSFX);
-        alreadyHit = true;
-        
+        if (!locked)
+        {
+            Debug.Log("Attacked");
+            animator.SetTrigger("isAttacking");
 
-        yield return new WaitForSeconds(hitCooldown);
+            audioSource.PlayOneShot(attackingSFX);
+            alreadyHit = true;
 
-        alreadyHit = false;
+
+            yield return new WaitForSeconds(hitCooldown);
+
+            alreadyHit = false;
+        }
+        
     }
 
     public void Push()
