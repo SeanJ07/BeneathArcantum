@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class InputFieldChecker : MonoBehaviour
 {
@@ -15,8 +16,15 @@ public class InputFieldChecker : MonoBehaviour
     [SerializeField] private List<KeywordResponse> keywordResponses = new List<KeywordResponse>();
 
     [Header("Thinking Animation")]
-    [SerializeField] private float animationSpeed = 0.5f; // Time between each dot animation
+    [SerializeField] private float animationSpeed = 0.2f; // Faster animation speed
+    [SerializeField] private int animationCycles = 2; // Reduced cycles for faster display
 
+    [Header("Sound Effects")]
+    [SerializeField] private AudioClip[] typingSounds; // Array to assign sound effects
+    [SerializeField] private AudioSource audioSource;  // AudioSource to play the sounds
+    [SerializeField] private AudioClip unrecognizedCommandSound; // Sound for unrecognized command
+
+    private bool isBackspaceHeld = false; // Tracks if Backspace is held
     private Coroutine thinkingCoroutine;
 
     private void Awake()
@@ -24,6 +32,31 @@ public class InputFieldChecker : MonoBehaviour
         if (inputField != null)
         {
             inputField.onSubmit.AddListener(ExecuteOnEnter);
+            inputField.onValueChanged.AddListener(PlayTypingSound);
+        }
+    }
+
+    private void Update()
+    {
+        // Detect if Backspace is held
+        if (Input.GetKey(KeyCode.Backspace))
+        {
+            isBackspaceHeld = true;
+        }
+        else
+        {
+            isBackspaceHeld = false;
+        }
+    }
+
+    private void PlayTypingSound(string input)
+    {
+        // Only play sounds if Backspace isn't being held
+        if (!isBackspaceHeld && typingSounds != null && typingSounds.Length > 0 && audioSource != null)
+        {
+            // Select a random sound effect from the array
+            AudioClip randomSound = typingSounds[Random.Range(0, typingSounds.Length)];
+            audioSource.PlayOneShot(randomSound);
         }
     }
 
@@ -46,8 +79,8 @@ public class InputFieldChecker : MonoBehaviour
         string[] dots = { ".", "..", "..." };
         int index = 0;
 
-        // Loop through the animation for a few cycles (example: 3 full cycles)
-        for (int i = 0; i < 3; i++)
+        // Loop through the animation for a few cycles
+        for (int i = 0; i < animationCycles; i++)
         {
             outputText.text = dots[index];
             index = (index + 1) % dots.Length; // Loop through the dots array
@@ -65,12 +98,19 @@ public class InputFieldChecker : MonoBehaviour
             if (input.Contains(keywordResponse.keyword))
             {
                 outputText.text = keywordResponse.responseText;
+
+                // Invoke the associated action if it exists
+                keywordResponse.action?.Invoke();
                 return;
             }
         }
 
-        // If no keywords are matched, clear the text
-        outputText.text = string.Empty;
+        // If no keywords are matched, play sound and display "not recognized" message
+        outputText.text = $"\"{input}\" is not a recognized command.";
+        if (audioSource != null && unrecognizedCommandSound != null)
+        {
+            audioSource.PlayOneShot(unrecognizedCommandSound);
+        }
     }
 
     private void OnDestroy()
@@ -78,6 +118,7 @@ public class InputFieldChecker : MonoBehaviour
         if (inputField != null)
         {
             inputField.onSubmit.RemoveListener(ExecuteOnEnter);
+            inputField.onValueChanged.RemoveListener(PlayTypingSound);
         }
     }
 }
@@ -87,4 +128,5 @@ public class KeywordResponse
 {
     public string keyword;      // The word to detect
     public string responseText; // The response to display
+    public UnityEvent action;   // Action to invoke when the keyword is matched
 }
