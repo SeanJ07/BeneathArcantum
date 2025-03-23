@@ -1,26 +1,32 @@
 using System.Collections;
 using UnityEngine;
-
+using Unity.VisualScripting;
 public class CameraController : MonoBehaviour
 {
-    public Transform pivot; // ???????????????
-    public float smoothTime = 0.375f; // ???????????????????????????????
-    public float speed = 5f; // ???????????
+    public Transform pivot;
+    public float smoothTime = 0.375f;
+    public float speed = 5f;
     private float xRotation = 0f;
-    private float yRotation = -45f; // ??????y?????-45??????????
+    private float yRotation = -45f;
     private float xTargetRotation = 0f;
     private float yTargetRotation = -45f;
 
-    public AudioSource audioSource; // AudioSource ???????
-    public AudioClip leftAudioClip; // ?????????????
-    public AudioClip rightAudioClip; // ?????????????
+    public AudioSource audioSource;
+    public AudioClip leftAudioClip;
+    public AudioClip rightAudioClip;
 
     private Coroutine rotationCoroutine;
-    private Coroutine holdCoroutine; 
+    private Coroutine holdCoroutine;
+
+    // Movement toggle for enabling/disabling camera movement
+    public bool movementEnabled = true;
+
 
     void Update()
     {
-        // Handles the X-axis rotation 
+        if (!movementEnabled) return; // Exit the update loop if movement is disabled
+
+        // Handles the X-axis rotation
         if (Input.GetKey(KeyCode.UpArrow))
         {
             xTargetRotation = Mathf.Clamp(xTargetRotation + speed * Time.deltaTime, -13f, 13f);
@@ -33,11 +39,11 @@ public class CameraController : MonoBehaviour
         xRotation = Mathf.Lerp(xRotation, xTargetRotation, Time.deltaTime * speed);
         pivot.localEulerAngles = new Vector3(xRotation, pivot.localEulerAngles.y, pivot.localEulerAngles.z);
 
-        // Handles the Y-axis rotation (Left/Right) with the hold functionality... for some reason
+        // Handles the Y-axis rotation (Left/Right) with the hold functionality
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             yTargetRotation += 45f; // Rotates left
-            PlayAudio(leftAudioClip); // Plays left audio effect
+            PlayAudio(leftAudioClip);
             StartSmoothRotation();
 
             if (holdCoroutine != null) StopCoroutine(holdCoroutine);
@@ -46,14 +52,14 @@ public class CameraController : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             yTargetRotation -= 45f; // Rotates right
-            PlayAudio(rightAudioClip); // Plays right audio effect
+            PlayAudio(rightAudioClip);
             StartSmoothRotation();
 
             if (holdCoroutine != null) StopCoroutine(holdCoroutine);
             holdCoroutine = StartCoroutine(HandleContinuousRotation(KeyCode.RightArrow));
         }
 
-        // Stop the hold functionality when the keys are released, still don't know why I added this
+        // Stop the hold functionality when the keys are released
         if (Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow))
         {
             if (holdCoroutine != null)
@@ -81,7 +87,7 @@ public class CameraController : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / smoothTime;
-            t = t * t * (3f - 2f * t); // The smooth step interpolation, god I hated this part 
+            t = t * t * (3f - 2f * t);
             yRotation = Mathf.Lerp(startYRotation, yTargetRotation, t);
             pivot.localEulerAngles = new Vector3(pivot.localEulerAngles.x, yRotation, pivot.localEulerAngles.z);
 
@@ -94,32 +100,31 @@ public class CameraController : MonoBehaviour
 
     private IEnumerator HandleContinuousRotation(KeyCode key)
     {
-        yield return new WaitForSeconds(1f); // Waits for the hold duration
+        yield return new WaitForSeconds(1f);
 
         while (Input.GetKey(key))
         {
             if (key == KeyCode.LeftArrow)
             {
-                yTargetRotation += 45f; // Moves 45 increments rotate left
-                PlayAudio(leftAudioClip); // Play left audio effect
+                yTargetRotation += 45f;
+                PlayAudio(leftAudioClip);
             }
             else if (key == KeyCode.RightArrow)
             {
-                yTargetRotation -= 45f; // Moves 45 increments rotate right
-                PlayAudio(rightAudioClip); // Play right audio effect
+                yTargetRotation -= 45f;
+                PlayAudio(rightAudioClip);
             }
 
             StartSmoothRotation();
-            yield return new WaitForSeconds(0.15f); // Rotates every 0.1 seconds
+            yield return new WaitForSeconds(0.15f);
         }
     }
 
     private Coroutine cameraMoveCoroutine;
 
-    public Vector3 likePosition = new Vector3(-0.38f, 3.28f, 0.67f); // Target camera position
-    public Quaternion likeRotation = Quaternion.Euler(-7.31f, 0f, 0f); // Target camera rotation
+    public Vector3 likePosition = new Vector3(-0.38f, 3.28f, 0.67f);
+    public Quaternion likeRotation = Quaternion.Euler(-7.31f, 0f, 0f);
 
-    // Call this method to activate the "like trigger"
     public void ActivateLikeTrigger()
     {
         if (cameraMoveCoroutine != null)
@@ -128,10 +133,9 @@ public class CameraController : MonoBehaviour
         cameraMoveCoroutine = StartCoroutine(MoveCameraToLikePosition());
     }
 
-    // Coroutine to smoothly move the camera
     private IEnumerator MoveCameraToLikePosition()
     {
-        Camera camera = Camera.main; // Assuming the main camera, adjust if using another
+        Camera camera = Camera.main;
         Vector3 startPosition = camera.transform.position;
         Quaternion startRotation = camera.transform.rotation;
 
@@ -141,7 +145,7 @@ public class CameraController : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             float t = elapsedTime / smoothTime;
-            t = t * t * (3f - 2f * t); // Smooth step interpolation
+            t = t * t * (3f - 2f * t);
 
             camera.transform.position = Vector3.Lerp(startPosition, likePosition, t);
             camera.transform.rotation = Quaternion.Lerp(startRotation, likeRotation, t);
@@ -153,8 +157,6 @@ public class CameraController : MonoBehaviour
         camera.transform.rotation = likeRotation;
     }
 
-
-    // Plays audio
     private void PlayAudio(AudioClip clip)
     {
         if (audioSource != null && clip != null)
