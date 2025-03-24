@@ -13,6 +13,7 @@ public class MatchWires : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
     public string wireName;
 
     private GameObject line;
+    private RectTransform lineRect;
     
     public void Start()
     {
@@ -23,7 +24,7 @@ public class MatchWires : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
     {
         //create a line/wire when clicked on
         line = Instantiate(lineObject, transform.position, Quaternion.identity, transform.parent.parent);
-
+        lineRect = line.GetComponent<RectTransform>();
         //get position of point of the click
         UpdateWire(Input.mousePosition);
     }
@@ -59,7 +60,8 @@ public class MatchWires : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
         Vector3 direction = position - transform.position;
         line.transform.right = direction;
 
-        line.transform.localScale = new Vector3(direction.magnitude/150, 1, 1);
+
+        lineRect.sizeDelta= new Vector2((position.x - transform.position.x), 25);
     }
     // Start is called before the first frame update
     
