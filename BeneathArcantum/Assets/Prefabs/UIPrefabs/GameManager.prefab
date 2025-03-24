@@ -10,8 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6034699987257793492}
   - component: {fileID: 6034699987257793493}
-  - component: {fileID: 6034699987257793483}
-  - component: {fileID: 6034699987042927677}
+  - component: {fileID: 2380803024289896682}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -46,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 108e3afdfb46ea9429de20bd7ceee9a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneStuff: {fileID: 6034699987257793483}
+  sceneStuff: {fileID: 0}
   mainCam: {fileID: 0}
   pauseScreen: {fileID: 0}
   levelCompletedScreen: {fileID: 0}
@@ -55,10 +54,11 @@ MonoBehaviour:
   startPoint: {fileID: 0}
   endPoint: {fileID: 0}
   currentCheckpoint: {fileID: 0}
+  camTransform: 0
   threeDCam: 0
   win: {fileID: 8300000, guid: 70f4f352af1d474459b65da06b6ee2c6, type: 3}
   lose: {fileID: 8300000, guid: 7908408ea1147d54a891c8c0e05f34c6, type: 3}
---- !u!114 &6034699987257793483
+--- !u!114 &2380803024289896682
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -74,16 +74,3 @@ MonoBehaviour:
   SceneTransitionObject: {fileID: 0}
   StartScreen: {fileID: 0}
   Canvas: {fileID: 0}
-  sceneToTransition: {fileID: 0}
---- !u!114 &6034699987042927677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6034699987257793494}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c4837e567b35024c8957b71e541ded4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

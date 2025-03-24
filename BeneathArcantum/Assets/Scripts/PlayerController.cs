@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     public bool locked = false;
     public bool playerWalking;
     Rigidbody playerRb;
+    public GameObject focalPoint;
 
     public bool topdownView;
 
@@ -82,6 +83,24 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckForGrounded();
+
+        
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (!alreadyHit)
+            {
+                StartCoroutine(AttackSequence());
+            }
+        }
+
+        CheckForFalling();
+        CheckForWalking();
+
+    }
+
+    protected void CheckForGrounded()
+    {
         if (grounded) // if the player is on the ground, add ground drag so the player doesn't slide.
         {
             playerRb.drag = groundDrag;
@@ -99,31 +118,63 @@ public class PlayerController : MonoBehaviour
         }
         if (!grounded || !onWall)
         {
-            gravMultiplier += Mathf.Pow(Time.deltaTime, 1.4f) ;
+            gravMultiplier += Mathf.Pow(Time.deltaTime, 1.4f);
             Physics.gravity = new Vector3(0, (-25 - gravMultiplier), 0);
         }
         else
         {
             Physics.gravity = new Vector3(0, -25, 0);
         }
+    }
 
-        
-        if (Input.GetMouseButtonDown(0))
+    protected void CheckForWalking() // Checks if the player is on the ground and walking.
+    {
+        if (playerWalking && grounded)
         {
-            if (!alreadyHit)
+            walkSoundCd -= Time.deltaTime;
+
+            if (walkSoundCd <= 0)
             {
-                StartCoroutine(AttackSequence());
-            }
-        }
 
-        if (health > maxHealth)
-        {
-            health = maxHealth;
+                audioSource.PlayOneShot(walking);
+                walkSoundCd = 0.5f;
+            }
+
         }
-        
-        
+        else
+        {
+            audioSource.Stop();
+            animator.SetBool("isWalking", false);
+        }
+    }
+
+
+
+    protected void CheckForFalling()
+    {
+        RaycastHit data;
+        Ray ray;
+        bool farFromGround;
+
+            if (Physics.Raycast(transform.position, Vector3.down, out data, 2f))
+            {
+            farFromGround = true;
+            }
+
+            else { farFromGround = false; }
+       
+
+        if (farFromGround)
+        {
+            animator.SetBool("IsFalling", true);
+        }
+        else if (!farFromGround)
+        {
+            animator.SetBool("IsFalling", false);
+        }
 
     }
+
 
     private void FixedUpdate()
     {
@@ -141,7 +192,7 @@ public class PlayerController : MonoBehaviour
         // Checks if the keys for the axis "Horizontal" are being inputted, and gives it a value between -1 and 1.
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        playerRb.AddForce(Vector3.right * movementSpeed * horizontal, ForceMode.Force);
+        playerRb.AddForce(focalPoint.transform.right * movementSpeed * horizontal, ForceMode.Force);
         if(horizontal != 0)
         {
             playerWalking = true;
@@ -162,7 +213,7 @@ public class PlayerController : MonoBehaviour
         }
         if (topdownView)
         {
-            playerRb.AddForce(Vector3.forward * movementSpeed * vertical, ForceMode.Force);
+            playerRb.AddForce(focalPoint.transform.forward * movementSpeed * vertical, ForceMode.Force);
             if(vertical != 0)
             {
                 playerWalking = true;
@@ -172,24 +223,6 @@ public class PlayerController : MonoBehaviour
                 playerWalking = false;
             }
         }
-
-        if (playerWalking && grounded)
-        {
-            walkSoundCd -= Time.deltaTime;
-
-            if (walkSoundCd <= 0)
-            {
-
-                audioSource.PlayOneShot(walking);
-                walkSoundCd = 0.5f;
-            }
-
-        }
-        else
-        {
-            audioSource.Stop();
-            animator.SetBool("isWalking", false);
-        } 
 
 
     }
@@ -226,9 +259,18 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Heal"))
         {
+            float theoryHeal = 10 + health;
+
             if (health != maxHealth)
             {
-                UpdateHealth(10);
+                if (theoryHeal > 10)
+                {
+                    UpdateHealth(10 - health);
+                }
+                else
+                {
+                    UpdateHealth(10);
+                }
                 Destroy(other.gameObject);
             }
         }
