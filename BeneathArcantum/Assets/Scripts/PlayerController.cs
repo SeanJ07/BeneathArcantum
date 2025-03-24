@@ -77,6 +77,12 @@ public class PlayerController : MonoBehaviour
             gameManager.deathScreen.SetActive(false);
         }
 
+        if (focalPoint == null)
+        {
+            focalPoint = this.gameObject;
+        }
+        else { return; }
+
        // renderThing.material = skinsManager.playerSkin;
     }
 
@@ -193,7 +199,7 @@ public class PlayerController : MonoBehaviour
         // Checks if the keys for the axis "Horizontal" are being inputted, and gives it a value between -1 and 1.
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
-        playerRb.AddForce(focalPoint.transform.right * movementSpeed * horizontal, ForceMode.Force);
+        
         // mr q said theres something here with the multiplying
         if(horizontal != 0)
         {
@@ -213,17 +219,25 @@ public class PlayerController : MonoBehaviour
         {
             playerWalking = false;
         }
+
+
         if (topdownView)
         {
             playerRb.AddForce(focalPoint.transform.forward * movementSpeed * vertical, ForceMode.Force);
-            if(vertical != 0)
+            playerRb.AddForce(focalPoint.transform.right * movementSpeed * horizontal, ForceMode.Force);
+            if (vertical != 0)
             {
                 playerWalking = true;
+                animator.SetBool("isWalking", true);
             }
             else
             {
                 playerWalking = false;
             }
+        }
+        else
+        {
+            playerRb.AddForce(Vector3.right * movementSpeed * horizontal, ForceMode.Force);
         }
 
 
