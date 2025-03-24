@@ -98,6 +98,7 @@ public class PlayerController : MonoBehaviour
         CheckForWalking();
 
     }
+    //move fixed update here
 
     protected void CheckForGrounded()
     {
@@ -193,6 +194,7 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
         playerRb.AddForce(focalPoint.transform.right * movementSpeed * horizontal, ForceMode.Force);
+        // mr q said theres something here with the multiplying
         if(horizontal != 0)
         {
             playerWalking = true;
