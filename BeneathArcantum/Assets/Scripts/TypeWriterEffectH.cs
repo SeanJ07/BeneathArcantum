@@ -1,27 +1,35 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 using TMPro;
 
 public class TypeWriterEffectH : MonoBehaviour
 {
-
-    public float delay = 0.1f;
+    public float delay = 0.5f; // Delay between words
     public string fullText;
     private string currentText = "";
 
-    // Use this for initialization
-    void Start()
+    // Called when the script is enabled
+    void OnEnable()
     {
+        // Reset the text and start the animation
+        currentText = "";
+        this.GetComponent<TextMeshProUGUI>().text = currentText;
         StartCoroutine(ShowText());
     }
 
     IEnumerator ShowText()
     {
-        for (int i = 0; i < fullText.Length; i++)
+        // Split fullText into words
+        string[] words = fullText.Split(' ');
+
+        // Iterate through each word
+        for (int i = 0; i < words.Length; i++)
         {
-            currentText = fullText.Substring(0, i);
+            // Append the next word and a space
+            currentText += words[i] + " ";
             this.GetComponent<TextMeshProUGUI>().text = currentText;
+
+            // Wait for the specified delay
             yield return new WaitForSeconds(delay);
         }
     }

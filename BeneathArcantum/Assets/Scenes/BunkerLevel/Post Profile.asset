@@ -1,5 +1,27 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6476598774616304380
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5485954d14dfb9a4c8ead8edb0ded5b1, type: 3}
+  m_Name: LiftGammaGain
+  m_EditorClassIdentifier: 
+  active: 1
+  lift:
+    m_OverrideState: 0
+    m_Value: {x: 1, y: 0.99130094, z: 0.9913012, w: 0}
+  gamma:
+    m_OverrideState: 1
+    m_Value: {x: 1, y: 0.9313055, z: 0.910328, w: 0}
+  gain:
+    m_OverrideState: 1
+    m_Value: {x: 0.9945427, y: 1, z: 0.807333, w: 0}
 --- !u!114 &-4570511184375764536
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -87,6 +109,7 @@ MonoBehaviour:
   - {fileID: 5414245658066301105}
   - {fileID: 6031104262291457436}
   - {fileID: 6786968792879594568}
+  - {fileID: -6476598774616304380}
 --- !u!114 &5414245658066301105
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -142,8 +165,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   active: 1
   postExposure:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1.2
   contrast:
     m_OverrideState: 0
     m_Value: 0
