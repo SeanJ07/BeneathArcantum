@@ -106,7 +106,7 @@ public class InputFieldChecker : MonoBehaviour
         }
 
         // If no keywords are matched, play sound and display "not recognized" message
-        outputText.text = $"\"{input}\" is not a recognized command.";
+        outputText.text = $"- \"{input}\" is not a recognized command.";
         if (audioSource != null && unrecognizedCommandSound != null)
         {
             audioSource.PlayOneShot(unrecognizedCommandSound);
