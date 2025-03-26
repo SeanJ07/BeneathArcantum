@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class MatchWires : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerEnterHandler,IPointerUpHandler
+public class MatchWires : MonoBehaviour
 {
     static MatchWires hoverWire;
     
@@ -13,33 +13,37 @@ public class MatchWires : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
     public string wireName;
 
     private GameObject line;
-    private RectTransform lineRect;
+    private LineRenderer lineRend;
+
+
     
     public void Start()
     {
         
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void OnMouseDown(PointerEventData eventData)
     {
         //create a line/wire when clicked on
         line = Instantiate(lineObject, transform.position, Quaternion.identity, transform.parent.parent);
-        lineRect = line.GetComponent<RectTransform>();
+        lineRend = line.GetComponent<LineRenderer>();
+        lineRend.positionCount = 2;
+        lineRend.SetPosition(0, transform.position);
         //get position of point of the click
         UpdateWire(Input.mousePosition);
     }
-    public void OnDrag(PointerEventData eventData)
+    public void OnMouseDrag(PointerEventData eventData)
     {
         //updates position of wire
         UpdateWire(Input.mousePosition);
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
+    public void OnMouseEnter(PointerEventData eventData)
     {
         hoverWire = this;
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public void OnMouseUp(PointerEventData eventData)
     {
         if(!this.Equals(hoverWire) && wireName.Equals(hoverWire.wireName))
         {
@@ -60,8 +64,7 @@ public class MatchWires : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoi
         Vector3 direction = position - transform.position;
         line.transform.right = direction;
 
-
-        lineRect.sizeDelta= new Vector2((position.x - transform.position.x), 25);
+        lineRend.SetPosition(1, position);
     }
     // Start is called before the first frame update
     
