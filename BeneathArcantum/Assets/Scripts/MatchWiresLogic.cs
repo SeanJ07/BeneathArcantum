@@ -8,6 +8,8 @@ public class MatchWiresLogic : MonoBehaviour
 
     public int maxWires = 3;
     public GameObject wireObject;
+    public GameObject uiCamera;
+    public GameObject mainCamera;
     private int points = 0;
     private GameObject door;
     private PlayerController player;
@@ -28,6 +30,8 @@ public class MatchWiresLogic : MonoBehaviour
         {
             door.GetComponent<DoorOpening>().DoorOpen();
             wireObject.SetActive(false);
+            uiCamera.SetActive(false);
+            mainCamera.SetActive(true);
             player.locked = false;
         }
     }

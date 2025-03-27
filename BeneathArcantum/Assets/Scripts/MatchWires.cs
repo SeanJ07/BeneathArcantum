@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class MatchWires : MonoBehaviour
+public class MatchWires : MonoBehaviour //IPointerDownHandler, IDragHandler, IPointerEnterHandler,IPointerUpHandler
 {
     static MatchWires hoverWire;
     
@@ -12,6 +13,7 @@ public class MatchWires : MonoBehaviour
     
     public string wireName;
 
+    private Camera uiCamera;
     private GameObject line;
     private LineRenderer lineRend;
 
@@ -19,31 +21,40 @@ public class MatchWires : MonoBehaviour
     
     public void Start()
     {
-        
+        uiCamera = GameObject.FindGameObjectWithTag("UICamera").GetComponent<Camera>();
     }
 
-    public void OnMouseDown(PointerEventData eventData)
+    private void Update()
     {
+        OnMouseDrag();
+    }
+    public void OnMouseDown()
+    {
+        Vector3 mousePos = uiCamera.ScreenToWorldPoint(Input.mousePosition);
         //create a line/wire when clicked on
         line = Instantiate(lineObject, transform.position, Quaternion.identity, transform.parent.parent);
         lineRend = line.GetComponent<LineRenderer>();
         lineRend.positionCount = 2;
         lineRend.SetPosition(0, transform.position);
+        
         //get position of point of the click
-        UpdateWire(Input.mousePosition);
+        UpdateWire(mousePos);
     }
-    public void OnMouseDrag(PointerEventData eventData)
+    public void OnMouseDrag()
     {
         //updates position of wire
-        UpdateWire(Input.mousePosition);
+        Vector3 mousePos = uiCamera.ScreenToWorldPoint(Input.mousePosition);
+      
+        
+        UpdateWire(mousePos);
     }
 
-    public void OnMouseEnter(PointerEventData eventData)
+    public void OnMouseEnter()
     {
         hoverWire = this;
     }
 
-    public void OnMouseUp(PointerEventData eventData)
+    public void OnMouseUp()
     {
         if(!this.Equals(hoverWire) && wireName.Equals(hoverWire.wireName))
         {
