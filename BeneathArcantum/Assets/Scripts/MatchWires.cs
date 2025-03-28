@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
+
 
 public class MatchWires : MonoBehaviour //IPointerDownHandler, IDragHandler, IPointerEnterHandler,IPointerUpHandler
 {
@@ -26,7 +25,7 @@ public class MatchWires : MonoBehaviour //IPointerDownHandler, IDragHandler, IPo
 
     private void Update()
     {
-        OnMouseDrag();
+        
     }
     public void OnMouseDown()
     {
@@ -75,7 +74,7 @@ public class MatchWires : MonoBehaviour //IPointerDownHandler, IDragHandler, IPo
         Vector3 direction = position - transform.position;
         line.transform.right = direction;
 
-        lineRend.SetPosition(1, position);
+        lineRend.SetPosition(1, new Vector3(position.x, position.y, position.z));
     }
     // Start is called before the first frame update
     
