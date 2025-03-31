@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement")] // Variables that concern movement
     public float movementSpeed = 50f;
+    public float rotationSpeed = 150f;
     public float jumpForce = 20f;
     private float gravMultiplier = 1;
     public bool locked = false;
@@ -199,21 +200,20 @@ public class PlayerController : MonoBehaviour
         // Checks if the keys for the axis "Horizontal" are being inputted, and gives it a value between -1 and 1.
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
+
+        Vector3 moveDir = new Vector3(horizontal, 0, 0);
+        moveDir.Normalize();
+        Quaternion look = Quaternion.LookRotation(moveDir, Vector3.up);
+        if (!topdownView)
+        {
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, look, rotationSpeed * Time.deltaTime);
+        }
         
         // mr q said theres something here with the multiplying
-        if(horizontal != 0)
+        if(moveDir != Vector3.zero)
         {
             playerWalking = true;
             animator.SetBool("isWalking", true);
-
-            if (horizontal < 0)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-            }
-            if (horizontal > 0)
-            {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-            }
         }
         else
         {
@@ -225,8 +225,14 @@ public class PlayerController : MonoBehaviour
         {
             playerRb.AddForce(focalPoint.transform.forward * movementSpeed * vertical, ForceMode.Force);
             playerRb.AddForce(focalPoint.transform.right * movementSpeed * horizontal, ForceMode.Force);
-            if (vertical != 0)
+
+            Vector3 moveDirTopDown = new Vector3(horizontal, 0, vertical);
+            moveDirTopDown.Normalize();
+            Quaternion lookDir = Quaternion.LookRotation(moveDirTopDown, Vector3.up);
+
+            if (moveDirTopDown != Vector3.zero)
             {
+                transform.localRotation = Quaternion.RotateTowards(transform.rotation, lookDir, rotationSpeed * Time.deltaTime);
                 playerWalking = true;
                 animator.SetBool("isWalking", true);
             }
