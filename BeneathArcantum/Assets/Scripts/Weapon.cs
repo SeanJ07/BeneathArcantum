@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    // Start is called before the first frame update
+    Rigidbody rb;
+    GameObject player;
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        rb = GetComponent<Rigidbody>();
+        player = GameObject.Find("Player");
     }
 
     void OnTriggerEnter(Collider other)
@@ -21,6 +17,13 @@ public class Weapon : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             Destroy(other.gameObject);
+        }
+        if (transform.parent == null)
+        {
+            if (other.gameObject.CompareTag("Player"))
+            {
+                transform.SetParent(player.transform);
+            }
         }
     }
 }

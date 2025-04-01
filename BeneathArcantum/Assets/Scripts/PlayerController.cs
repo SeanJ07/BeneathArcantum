@@ -100,6 +100,10 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(AttackSequence());
             }
         }
+        if (Input.GetMouseButtonDown(1))
+        {
+            StartCoroutine(ThrowAttackSequence());
+        }
 
         CheckForFalling();
         CheckForWalking();
@@ -201,23 +205,23 @@ public class PlayerController : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Vector3 moveDir = new Vector3(horizontal, 0, 0);
-        moveDir.Normalize();
-        Quaternion look = Quaternion.LookRotation(moveDir, Vector3.up);
         if (!topdownView)
         {
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, look, rotationSpeed * Time.deltaTime);
-        }
-        
-        // mr q said theres something here with the multiplying
-        if(moveDir != Vector3.zero)
-        {
-            playerWalking = true;
-            animator.SetBool("isWalking", true);
-        }
-        else
-        {
-            playerWalking = false;
+            playerRb.AddForce(Vector3.right * movementSpeed * horizontal, ForceMode.Force);
+
+            // mr q said theres something here with the multiplying
+            if (horizontal != 0)
+            {
+                playerWalking = true;
+                animator.SetBool("isWalking", true);
+
+                if (horizontal > 0) { transform.rotation = Quaternion.Euler(0, 180, 0); }
+                else if (horizontal < 0) { transform.rotation = Quaternion.Euler(0, 0, 0); }
+            }
+            else
+            {
+                playerWalking = false;
+            }
         }
 
 
@@ -240,10 +244,6 @@ public class PlayerController : MonoBehaviour
             {
                 playerWalking = false;
             }
-        }
-        else
-        {
-            playerRb.AddForce(Vector3.right * movementSpeed * horizontal, ForceMode.Force);
         }
 
 
@@ -326,6 +326,19 @@ public class PlayerController : MonoBehaviour
             alreadyHit = false;
         }
         
+    }
+
+    public IEnumerator ThrowAttackSequence()
+    {
+        if (!locked && weapon.transform.parent == this)
+        {
+            Vector3 throwPos = (Input.mousePosition.normalized);
+            animator.SetTrigger("isAttacking");
+            yield return new WaitForSeconds(0.33f);
+            weapon.transform.SetParent(null);
+            weapon.GetComponent<Rigidbody>().AddForce(throwPos * 5f, ForceMode.Impulse);
+            
+        }
     }
 
     public void Push()
