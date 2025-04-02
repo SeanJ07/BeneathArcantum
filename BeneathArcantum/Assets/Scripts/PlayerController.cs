@@ -330,13 +330,13 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator ThrowAttackSequence()
     {
-        if (!locked && weapon.transform.parent == this)
+        if (!locked && weapon.transform.parent == this.gameObject.transform)
         {
             Vector3 throwPos = (Input.mousePosition.normalized);
             animator.SetTrigger("isAttacking");
             yield return new WaitForSeconds(0.33f);
             weapon.transform.SetParent(null);
-            weapon.GetComponent<Rigidbody>().AddForce(throwPos * 5f, ForceMode.Impulse);
+            weapon.GetComponent<Rigidbody>().AddForce(throwPos * 500f, ForceMode.Impulse);
             
         }
     }

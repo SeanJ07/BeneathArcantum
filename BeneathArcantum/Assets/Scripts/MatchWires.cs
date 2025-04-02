@@ -72,7 +72,7 @@ public class MatchWires : MonoBehaviour //IPointerDownHandler, IDragHandler, IPo
     void UpdateWire(Vector3 position)
     {
         Vector3 direction = position - transform.position;
-        line.transform.right = direction;
+        //line.transform.right = new Vector3(position.x, position.y, position.z);
 
         lineRend.SetPosition(1, new Vector3(position.x, position.y, position.z));
     }
