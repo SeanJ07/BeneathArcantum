@@ -23,26 +23,24 @@ public class MatchWires : MonoBehaviour //IPointerDownHandler, IDragHandler, IPo
         uiCamera = GameObject.FindGameObjectWithTag("UICamera").GetComponent<Camera>();
     }
 
-    private void Update()
-    {
-        
-    }
+   
     public void OnMouseDown()
     {
-        Vector3 mousePos = uiCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 startMousePos = uiCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, uiCamera.transform.position.z));
         //create a line/wire when clicked on
         line = Instantiate(lineObject, transform.position, Quaternion.identity, transform.parent.parent);
         lineRend = line.GetComponent<LineRenderer>();
         lineRend.positionCount = 2;
-        lineRend.SetPosition(0, transform.position);
+        lineRend.SetPosition(0, new Vector3(startMousePos.x, startMousePos.y, startMousePos.z));
+        
         
         //get position of point of the click
-        UpdateWire(mousePos);
+        
     }
     public void OnMouseDrag()
     {
         //updates position of wire
-        Vector3 mousePos = uiCamera.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mousePos = uiCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, uiCamera.transform.position.z));
       
         
         UpdateWire(mousePos);
@@ -71,11 +69,11 @@ public class MatchWires : MonoBehaviour //IPointerDownHandler, IDragHandler, IPo
 
     void UpdateWire(Vector3 position)
     {
-        Vector3 direction = position - transform.position;
-        //line.transform.right = new Vector3(position.x, position.y, position.z);
-
+        //Vector3 direction = position - transform.position;
+        line.transform.right = position;
+        lineRend.SetPosition(0, transform.position);
         lineRend.SetPosition(1, new Vector3(position.x, position.y, position.z));
     }
-    // Start is called before the first frame update
-    
+
+
 }
