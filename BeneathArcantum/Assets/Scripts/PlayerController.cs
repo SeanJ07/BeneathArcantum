@@ -17,6 +17,9 @@ public class PlayerController : MonoBehaviour
     public bool playerWalking;
     Rigidbody playerRb;
     public GameObject focalPoint;
+    public GameObject orientation;
+    Vector3 moveDirection;
+    public GameObject playerRig;
 
     public bool topdownView;
 
@@ -102,10 +105,10 @@ public class PlayerController : MonoBehaviour
         }
         if (Input.GetMouseButtonDown(1))
         {
-            StartCoroutine(ThrowAttackSequence());
+            //ThrowAttackSequence();
         }
 
-        CheckForFalling();
+        //CheckForFalling();
         CheckForWalking();
 
     }
@@ -116,7 +119,7 @@ public class PlayerController : MonoBehaviour
         if (grounded) // if the player is on the ground, add ground drag so the player doesn't slide.
         {
             playerRb.drag = groundDrag;
-            gravMultiplier = 0;
+            gravMultiplier = 2;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && grounded || (Input.GetKeyDown(KeyCode.Space) && onWall)) // makes it so you can jump off of walls and on the ground.
@@ -178,11 +181,11 @@ public class PlayerController : MonoBehaviour
 
         if (farFromGround)
         {
-            animator.SetBool("IsFalling", true);
+            animator.SetBool("isFalling", true);
         }
         else if (!farFromGround)
         {
-            animator.SetBool("IsFalling", false);
+            animator.SetBool("isFalling", false);
         }
 
     }
@@ -227,16 +230,17 @@ public class PlayerController : MonoBehaviour
 
         if (topdownView)
         {
-            playerRb.AddForce(focalPoint.transform.forward * movementSpeed * vertical, ForceMode.Force);
-            playerRb.AddForce(focalPoint.transform.right * movementSpeed * horizontal, ForceMode.Force);
+            
+            Vector3 viewDir = transform.position - new Vector3(focalPoint.transform.position.x, transform.position.y, focalPoint.transform.position.z);
+            orientation.transform.forward = viewDir;
+            moveDirection = orientation.transform.forward * vertical + orientation.transform.right * horizontal;
 
-            Vector3 moveDirTopDown = new Vector3(horizontal, 0, vertical);
-            moveDirTopDown.Normalize();
-            Quaternion lookDir = Quaternion.LookRotation(moveDirTopDown, Vector3.up);
+            playerRb.AddForce(moveDirection.normalized * movementSpeed, ForceMode.Force);
 
-            if (moveDirTopDown != Vector3.zero)
+
+            if (moveDirection != Vector3.zero)
             {
-                transform.localRotation = Quaternion.RotateTowards(transform.rotation, lookDir, rotationSpeed * Time.deltaTime);
+                playerRig.transform.forward = Vector3.Slerp(playerRig.transform.forward, moveDirection.normalized, Time.deltaTime * rotationSpeed);
                 playerWalking = true;
                 animator.SetBool("isWalking", true);
             }
@@ -328,16 +332,18 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    public IEnumerator ThrowAttackSequence()
+    public void ThrowAttackSequence()
     {
-        if (!locked && weapon.transform.parent == this.gameObject.transform)
+        if (!locked && weapon.activeInHierarchy)
         {
+            print("throw");
             Vector3 throwPos = (Input.mousePosition.normalized);
-            animator.SetTrigger("isAttacking");
-            yield return new WaitForSeconds(0.33f);
-            weapon.transform.SetParent(null);
-            weapon.GetComponent<Rigidbody>().AddForce(throwPos * 500f, ForceMode.Impulse);
-            
+
+            GameObject newWeapon = Instantiate(weapon, this.transform.position + new Vector3(-0.5f, 0, 0), Quaternion.identity);
+            newWeapon.AddComponent<Rigidbody>();
+            newWeapon.AddComponent<MeshCollider>().isTrigger = false; newWeapon.GetComponent<MeshCollider>().convex = true;
+            newWeapon.GetComponent<Rigidbody>().AddForce(throwPos * 500f, ForceMode.Impulse);
+            weapon.SetActive(false);
         }
     }
 
