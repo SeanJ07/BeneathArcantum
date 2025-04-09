@@ -236,11 +236,8 @@ public class PlayerController : MonoBehaviour
             moveDirection = orientation.transform.forward * vertical + orientation.transform.right * horizontal;
 
             playerRb.AddForce(moveDirection.normalized * movementSpeed, ForceMode.Force);
-
-
-            if (moveDirection != Vector3.zero)
+            if (horizontal != 0 || vertical != 0)
             {
-                playerRig.transform.forward = Vector3.Slerp(playerRig.transform.forward, moveDirection.normalized, Time.deltaTime * rotationSpeed);
                 playerWalking = true;
                 animator.SetBool("isWalking", true);
             }
@@ -248,6 +245,13 @@ public class PlayerController : MonoBehaviour
             {
                 playerWalking = false;
             }
+
+            if (moveDirection.magnitude != 0f)
+            {
+                playerRig.transform.forward = Vector3.Slerp(playerRig.transform.forward, moveDirection.normalized, Time.deltaTime * rotationSpeed);
+            }
+
+            
         }
 
 
