@@ -29,6 +29,7 @@ public class MatchWires : MonoBehaviour //IPointerDownHandler, IDragHandler, IPo
         Vector3 startMousePos = uiCamera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, uiCamera.transform.position.z));
         //create a line/wire when clicked on
         line = Instantiate(lineObject, transform.position, Quaternion.identity, transform.parent.parent);
+        
         lineRend = line.GetComponent<LineRenderer>();
         lineRend.positionCount = 2;
         lineRend.SetPosition(0, new Vector3(startMousePos.x, startMousePos.y, startMousePos.z));
