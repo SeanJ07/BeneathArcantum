@@ -1,9 +1,9 @@
 # 🏰 BeneathArcantum
 
-**🏆 4th Place — SkillsUSA National Game Development Competition**
+**🏆 4th Place — SkillsUSA State Game Development Competition**
 **Built by Hourhand Studios — a high school team I founded and led**
 
-A 3D action-platformer built in Unity. 53 custom C# scripts, 12 scenes, full game loop. Placed 4th in the country. Not perfectly finished — but we shipped a real game on a real deadline and competed with the best.
+A 3D action-platformer built in Unity. 53 custom C# scripts, 12 scenes, full game loop. Placed 4th in the state — not nationals, not perfect, but we shipped a real game on a real deadline and competed with the best.
 
 ---
 
