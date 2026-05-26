@@ -1,16 +1,19 @@
 # 🏰 BeneathArcantum
 
-**SkillsUSA 2025 — Game Development Competition Entry**
+**🏆 4th Place — SkillsUSA National Game Development Competition**
+**Built by Hourhand Studios — a high school team I founded and led**
 
-A 3D action-platformer built in Unity. Explore ancient ruins, solve puzzles, fight enemies, and uncover what lies beneath.
+A 3D action-platformer built in Unity. 53 custom C# scripts, 12 scenes, full game loop. Placed 4th in the country. Not perfectly finished — but we shipped a real game on a real deadline and competed with the best.
 
 ---
 
-## 🎮 What This Is
+## 🎮 The Real Story
 
-Built for the SkillsUSA game development competition. BeneathArcantum is a fully playable 3D game featuring multiple levels, enemy AI, puzzle mechanics, and a full game loop — from starting cutscene to level completion.
+This was the capstone project of **Hourhand Studios** — a creative team I assembled through SkillsUSA in my senior year. We built this game together, from concept to submission, and earned 4th place nationally.
 
-### Built in Unity 2021.3.42f1 with C#
+It's not polished. Some mechanics are rough, and I have no plans to continue it. But that's not the point. The point is: a group of high school students built a game with 53 scripts, enemy AI, puzzle mechanics, and a complete game loop — and placed 4th in the country.
+
+The last commit says "game done?" with a question mark. That's honest. It's as done as a competition deadline allows. I'm proud of what we built, and I'm proud of the team that built it.
 
 ---
 
