@@ -1,114 +1,73 @@
-#  BeneathArcantum
+# Beneath Arcantum
 
-** 4th Place — SkillsUSA State Game Development Competition**
-**Built by Hourhand Studios — a high school team I founded and led**
+**4th place — SkillsUSA State Game Development Competition, 2025**
 
-A 3D action-platformer built in Unity.
+A 3D action-platformer built in Unity over the course of my senior year. Dungeon crawler meets platformer — you move through underground environments, fight enemies, solve puzzles, and try not to fall into things.
 
----
+This was the first project of **Hourhand Studios**, a team I assembled through SkillsUSA. We went from concept to a complete, submittable game in one competition cycle. Some mechanics are rough around the edges. 4th place in states anyway.
 
-##  
-
-This was the first project of **Hourhand Studios** — a  team I assembled through SkillsUSA in my senior year. We built this game together, from concept to submission, and earned 4th place in states.
-
-It's not polished. Some mechanics are rough.
-
-I'm proud of what we built, and I'm proud of the team that built it.
+**Built with:** Unity 2021.3.42f1 · C# · NavMesh AI · TextMesh Pro
 
 ---
 
-##  What we Built
+### How to Run
 
-### Core Systems
-
-| System | What It Does |
-|--------|-------------|
-| **Player Controller** | Full 3D movement, jumping, attacking, health system, animations |
-| **Enemy AI** | NavMesh-based patrol, sight/attack range detection, damage system |
-| **Game Manager** | Level management, checkpoints, death screen, pause, level completion |
-| **Camera System** | Top-down and follow camera modes, smooth transitions |
-
-### Mechanics
-
-| Mechanic | Scripts |
-|----------|---------|
-|  **Puzzles** | Pressure plates, wire matching, breakable floors |
-|  **Doors & Platforms** | Moving platforms, door opening, climbable walls, ladders |
-|  **Combat** | Melee attacks, throw attacks, weapon pickup, damage cooldown |
-|  **Health** | Health bar UI, healing items, death/respawn, checkpoints |
-|  **Cutscenes** | 10 typewriter text effect variants for dialogue sequences |
-|  **Progression** | Checkpoints, end points, level completion screen |
-
-### Levels (12 scenes)
-
-| Scene | Type |
-|-------|------|
-| `StartingCutScene` | Opening cinematic |
-| `GameMenuProto1` | Main menu |
-| `BunkerLevel` | Full level |
-| `CaveScene` | Full level |
-| `CliffScene` | Full level |
-| `PrototypeLevels/` | 3 prototype/test levels |
-| `Sandbox` | Testing ground |
-| `Testing`, `CameraSysTest` | Development test scenes |
+1. Install [Unity Hub](https://unity.com/download) and Unity **2021.3.42f1**
+2. Clone the repo
+3. Open `BeneathArcantum/` as a Unity project
+4. Open `Assets/Scenes/StartingCutScene.unity`
+5. Hit Play
 
 ---
 
-##  By The Numbers
+### What We Built
 
-| Metric | Count |
-|--------|-------|
-| Custom C# scripts | 53 |
+**Core systems**
+
+| System | Description |
+|---|---|
+| Player Controller | Movement, jumping, attacking, health, animations — 382 lines |
+| Enemy AI | NavMesh patrol, sight/attack range detection, damage |
+| Game Manager | Level flow, checkpoints, death screen, pause, completion |
+| Camera System | Top-down and follow modes with smooth transitions |
+
+**Mechanics**
+
+Pressure plates, wire puzzles, breakable floors, moving platforms, climbable walls, ladders, melee + throw combat, weapon pickups, healing items, checkpoints, and 10 typewriter text effect variants for cutscene dialogue.
+
+**Scenes (12 total)**
+
+`StartingCutScene` → `GameMenuProto1` → `BunkerLevel` → `CaveScene` → `CliffScene` + prototype and test scenes
+
+---
+
+### By the Numbers
+
+| | |
+|---|---|
+| C# scripts | 53 |
 | Game scenes | 12 |
 | Asset files | 844+ |
-| Lines of C# | 3,000+ (estimated) |
-| PlayerController | 382 lines |
-| Typewriter text effects | 10 variants |
+| Lines of C# | ~3,000 |
+| PlayerController.cs | 382 lines |
+| Typewriter variants | 10 |
 
 ---
 
-##  SkillsUSA Context
-
-This was built for the SkillsUSA game development competition. The requirements pushed us to build a complete game loop — not just a demo, but start-to-finish gameplay with mechanics, UI, progression, and polish.
-
----
-
-##  How To Open
-
-1. Install Unity Hub + Unity 2021.3.42f1
-2. Clone this repo
-3. Open `BeneathArcantum/` as a Unity project
-4. Open `Assets/Scenes/StartingCutScene.unity` to start from the beginning
-5. Press Play
-
----
-
-##  What I'd Do Differently
-
-- Add screenshots to this README
-- Refactor the 10 TypeWriterEffect scripts into one parameterized class
-- Add a proper build to the Releases section
-- Clean up test scenes (Sandbox, Testing)
-
----
-
-##  Project Structure
-
-```
+### Project Structure
 BeneathArcantum/
 ├── Assets/
-│   ├── Scenes/           # 12 game scenes
-│   ├── Scripts/          # 53 C# scripts
-│   │   ├── PlayerController.cs    # Core player (382 lines)
-│   │   ├── EnemyController.cs     # Enemy AI (135 lines)
-│   │   ├── GameManager.cs         # Game state (132 lines)
-│   │   └── ...                    # 50+ more scripts
-│   └── TextMesh Pro/     # UI text rendering
-├── ProjectSettings/      # Unity project config
-└── macOS build/          # Pre-built macOS executable
-```
+│   ├── Scenes/         # 12 scenes
+│   ├── Scripts/        # 53 C# scripts
+│   │   ├── PlayerController.cs
+│   │   ├── EnemyController.cs
+│   │   ├── GameManager.cs
+│   │   └── ...
+│   └── TextMesh Pro/
+├── ProjectSettings/
+└── macOS build/        # Pre-built macOS executable
 
 ---
 
-*Built by Sean Jenkins — SkillsUSA 2025*
+*Built by Sean Jenkins and Hourhand Studios — SkillsUSA 2025.*  
 *"[Game done?](https://github.com/SeanJ07/BeneathArcantum/commit/ff5a0e2)" — yeah, I think so.*
