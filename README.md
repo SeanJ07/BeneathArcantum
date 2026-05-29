@@ -3,21 +3,21 @@
 ** 4th Place — SkillsUSA State Game Development Competition**
 **Built by Hourhand Studios — a high school team I founded and led**
 
-A 3D action-platformer built in Unity. 53 custom C# scripts, 12 scenes, full game loop. Placed 4th in the state.
+A 3D action-platformer built in Unity.
 
 ---
 
 ##  
 
-This was the capstone project of **Hourhand Studios** — a creative team I assembled through SkillsUSA in my senior year. We built this game together, from concept to submission, and earned 4th place in states.
+This was the first project of **Hourhand Studios** — a  team I assembled through SkillsUSA in my senior year. We built this game together, from concept to submission, and earned 4th place in states.
 
-It's not polished. Some mechanics are rough, The point is: a group of high school students built a game with 53 scripts, enemy AI, puzzle mechanics, and a complete game loop — and placed 4th in the state.
+It's not polished. Some mechanics are rough.
 
-The last commit says "game done?" with a question mark. That's honest. It's as done as a competition deadline allows. I'm proud of what we built, and I'm proud of the team that built it.
+I'm proud of what we built, and I'm proud of the team that built it.
 
 ---
 
-## 🛠️ What I Built
+##  What we Built
 
 ### Core Systems
 
@@ -32,12 +32,12 @@ The last commit says "game done?" with a question mark. That's honest. It's as d
 
 | Mechanic | Scripts |
 |----------|---------|
-| 🧩 **Puzzles** | Pressure plates, wire matching, breakable floors |
-| 🚪 **Doors & Platforms** | Moving platforms, door opening, climbable walls, ladders |
-| ⚔️ **Combat** | Melee attacks, throw attacks, weapon pickup, damage cooldown |
-| ❤️ **Health** | Health bar UI, healing items, death/respawn, checkpoints |
-| 🎬 **Cutscenes** | 10 typewriter text effect variants for dialogue sequences |
-| 🏁 **Progression** | Checkpoints, end points, level completion screen |
+|  **Puzzles** | Pressure plates, wire matching, breakable floors |
+|  **Doors & Platforms** | Moving platforms, door opening, climbable walls, ladders |
+|  **Combat** | Melee attacks, throw attacks, weapon pickup, damage cooldown |
+|  **Health** | Health bar UI, healing items, death/respawn, checkpoints |
+|  **Cutscenes** | 10 typewriter text effect variants for dialogue sequences |
+|  **Progression** | Checkpoints, end points, level completion screen |
 
 ### Levels (12 scenes)
 
@@ -54,7 +54,7 @@ The last commit says "game done?" with a question mark. That's honest. It's as d
 
 ---
 
-## 📊 By The Numbers
+##  By The Numbers
 
 | Metric | Count |
 |--------|-------|
@@ -67,15 +67,13 @@ The last commit says "game done?" with a question mark. That's honest. It's as d
 
 ---
 
-## 🏆 SkillsUSA Context
+##  SkillsUSA Context
 
-This was built for the SkillsUSA game development competition. The requirements pushed me to build a complete game loop — not just a demo, but start-to-finish gameplay with mechanics, UI, progression, and polish.
-
-The commit message "game done?" wasn't uncertainty about the build — it was the moment I realized I'd actually shipped a full game on a competition deadline.
+This was built for the SkillsUSA game development competition. The requirements pushed us to build a complete game loop — not just a demo, but start-to-finish gameplay with mechanics, UI, progression, and polish.
 
 ---
 
-## 🔧 How To Open
+##  How To Open
 
 1. Install Unity Hub + Unity 2021.3.42f1
 2. Clone this repo
@@ -85,16 +83,16 @@ The commit message "game done?" wasn't uncertainty about the build — it was th
 
 ---
 
-## 🎯 What I'd Do Differently
+##  What I'd Do Differently
 
-- Add screenshots to this README (coming soon)
+- Add screenshots to this README
 - Refactor the 10 TypeWriterEffect scripts into one parameterized class
 - Add a proper build to the Releases section
 - Clean up test scenes (Sandbox, Testing)
 
 ---
 
-## 📂 Project Structure
+##  Project Structure
 
 ```
 BeneathArcantum/
