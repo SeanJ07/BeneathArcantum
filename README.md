@@ -11,7 +11,7 @@ A 3D action-platformer built in Unity. 53 custom C# scripts, 12 scenes, full gam
 
 This was the capstone project of **Hourhand Studios** — a creative team I assembled through SkillsUSA in my senior year. We built this game together, from concept to submission, and earned 4th place nationally.
 
-It's not polished. Some mechanics are rough, and I have no plans to continue it. But that's not the point. The point is: a group of high school students built a game with 53 scripts, enemy AI, puzzle mechanics, and a complete game loop — and placed 4th in the country.
+It's not polished. Some mechanics are rough, The point is: a group of high school students built a game with 53 scripts, enemy AI, puzzle mechanics, and a complete game loop — and placed 4th in the country.
 
 The last commit says "game done?" with a question mark. That's honest. It's as done as a competition deadline allows. I'm proud of what we built, and I'm proud of the team that built it.
 
