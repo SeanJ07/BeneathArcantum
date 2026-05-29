@@ -1,17 +1,17 @@
-# 🏰 BeneathArcantum
+#  BeneathArcantum
 
-**🏆 4th Place — SkillsUSA State Game Development Competition**
+** 4th Place — SkillsUSA State Game Development Competition**
 **Built by Hourhand Studios — a high school team I founded and led**
 
-A 3D action-platformer built in Unity. 53 custom C# scripts, 12 scenes, full game loop. Placed 4th in the state — not nationals, not perfect, but we shipped a real game on a real deadline and competed with the best.
+A 3D action-platformer built in Unity. 53 custom C# scripts, 12 scenes, full game loop. Placed 4th in the state.
 
 ---
 
-## 🎮 The Real Story
+##  
 
-This was the capstone project of **Hourhand Studios** — a creative team I assembled through SkillsUSA in my senior year. We built this game together, from concept to submission, and earned 4th place nationally.
+This was the capstone project of **Hourhand Studios** — a creative team I assembled through SkillsUSA in my senior year. We built this game together, from concept to submission, and earned 4th place in states.
 
-It's not polished. Some mechanics are rough, The point is: a group of high school students built a game with 53 scripts, enemy AI, puzzle mechanics, and a complete game loop — and placed 4th in the country.
+It's not polished. Some mechanics are rough, The point is: a group of high school students built a game with 53 scripts, enemy AI, puzzle mechanics, and a complete game loop — and placed 4th in the state.
 
 The last commit says "game done?" with a question mark. That's honest. It's as done as a competition deadline allows. I'm proud of what we built, and I'm proud of the team that built it.
 
